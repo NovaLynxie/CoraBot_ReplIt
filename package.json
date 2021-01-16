@@ -1,0 +1,45 @@
+{
+  "name": "corabot",
+  "version": "2.2.1b",
+  "private": true,
+  "description": "Discord Bot for CoraLynx",
+  "main": "app.js",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
+  "scripts": {
+    "test": "echo \"Warn: no test specified\" && exit 0",
+    "setup": "node ./cora_modules/internal/setup.js",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "Discord.JS",
+    "Commando",
+    "NodeJS"
+  ],
+  "author": "NovaLynxie",
+  "license": "MIT",
+  "dependencies": {
+    "common-tags": "^1.8.0",
+    "discord-bot-dashboard": "^0.2.0",
+    "discord.js": "github:discordjs/discord.js",
+    "discord.js-commando": "github:discordjs/Commando",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "furrybotapi": "^2.0.10",
+    "log-timestamp": "^0.3.0",
+    "minecraft-server-util": "^3.4.2",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2",
+    "moment-timezone": "^0.5.28",
+    "node-base64-img": "^1.0.1",
+    "node-fetch": "^2.6.1",
+    "pug": "^3.0.0",
+    "sqlite": "^4.0.2",
+    "toml": "^3.0.0",
+    "winston": "^3.2.1",
+    "yiff": "^2.0.2"
+  }
+}

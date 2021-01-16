@@ -1,0 +1,40 @@
+{
+  "name": "corabot",
+  "version": "2.2.0a",
+  "private": true,
+  "description": "Discord Bot for CoraLynx",
+  "main": "app.js",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
+  "scripts": {
+    "test": "echo \"Warn: no test specified\" && exit 0",
+    "setup": "node ./cora_modules/internal/setup.js",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "Discord.JS",
+    "Commando",
+    "NodeJS"
+  ],
+  "author": "NovaLynxie",
+  "license": "MIT",
+  "dependencies": {
+    "common-tags": "^1.8.0",
+    "discord-bot-dashboard": "github:julianYaman/discord-bot-dashboard#the-epic-gamer-branch",
+    "discord.js": "github:discordjs/discord.js",
+    "discord.js-commando": "github:discordjs/Commando",
+    "express": "^4.17.1",
+    "furrybotapi": "^2.0.10",
+    "log-timestamp": "^0.3.0",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2",
+    "moment-timezone": "^0.5.28",
+    "node-fetch": "^2.6.1",
+    "sqlite": "^4.0.2",
+    "toml": "^3.0.0",
+    "winston": "^3.2.1",
+    "yiff": "^2.0.2"
+  }
+}
