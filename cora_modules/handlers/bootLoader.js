@@ -48,7 +48,7 @@ var eImg = { // Required to use e621 and e926 modules.
 // Yiffy UserAgent for CoraBot. Required otherwise it will fail to work correctly.
 const myUserAgent = `CoraBot/${version} (https://github.com/NovaLynxie/CoraBot_ReplIt)`
 // Load bot secrets from process.env if this fails use config vars.
-var { botToken, ownerID } = process.env;
+var { botToken, yiffyApiKey ownerID } = process.env;
 logger.debug('Loaded process environment variables!');
 // Load bot assets from folders as necessary.
 logger.info('Loading bot assets...')
