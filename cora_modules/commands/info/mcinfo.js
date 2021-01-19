@@ -38,7 +38,11 @@ module.exports = class MCSrvInfoCommand extends Command {
   async run(message, {ip, port}) {
     logger.debug(`ip=${ip}; port=${port};`);
     function hostValidator(ip) {
-      
+      if (ip == 'localhost') {
+        logger.warn('Ignoring localhost as this would send request to local network of bot and most likely fail.');
+        message.reply(`I can't parse that! That would send those requests into my host's mainframe!`);
+        return;
+      }
     }
     ip.match()
     try {

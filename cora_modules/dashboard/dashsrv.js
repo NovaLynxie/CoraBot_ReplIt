@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const logger = require('./dashlog.js');
+const logger = require('../providers/WinstonPlugin');
 
 logger.info('Starting dashboard server...')
 

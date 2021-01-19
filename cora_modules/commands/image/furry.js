@@ -1,11 +1,13 @@
 const { Command } = require('discord.js-commando');
 const { MessageEmbed, MessageFlags } = require('discord.js');
 const logger = require('../../providers/WinstonPlugin');
+const { yiffyApiKey, myUserAgent } = require('../../handlers/bootLoader');
 const { stripIndents } = require('common-tags');
-const fetch = require('node-fetch');
-//const yiff = require('yiff'); // Already handled by FurryBotAPI directly. May use to reduce number of modules required.
-const FurryBotAPI = require('furrybotapi');
-const furrybot = new FurryBotAPI();
+const Yiffy = require('yiffy');
+const yiffy = new Yiffy({
+    userAgent: myUserAgent,
+    apiKey: yiffyApiKey
+});
 
 module.exports = class FurryCommand extends Command {
     constructor(client) {
@@ -15,10 +17,10 @@ module.exports = class FurryCommand extends Command {
             group: 'image',
             memberName: 'furry',
             description: 'Some fun furry images using FurryBotAPI.',
-            details: ` COMMAND IS WIP! MAY NOT WORK CORRECTLY!
-            This command provides a bunch of fun furry images powered by the FurryBotAPI.
-            From cheeky licks, cute hugs and cuddles, to the more daring or lustful ones.
-            Service provided by DonovanDMC (https://github.com/FurryBotCo/FurryBotAPI)`,
+            details: stripIndents`
+                Provides a bunch of fun furry images powered by the FurryBotAPI.
+                From cheeky licks, cute hugs and cuddles, to the more daring or lustful ones.
+                Service provided by DonovanDMC (https://github.com/FurryBotCo/Yiffy)`,
             examples: ['furry <option>'],
             args: [
                 {
@@ -65,11 +67,12 @@ module.exports = class FurryCommand extends Command {
                 )
                 .setThumbnail(client.user.avatarURL({format:"png"}))
                 .setImage(res.url)
-                .setFooter('Bot created and maintained by NovaLynxie. Image provided by FurryBotAPI.', client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by Yiffy API.', client.user.avatarURL({format:"png"}))
             return message.channel.send(imageEmbed); // Sends the image embed to the channel the user ran the command.
         }
         // furry command option handler.
         if (option === 'help') {
+            logger.debug('Help requested. Sending helpEmbed.')
             const helpEmbed = new MessageEmbed()
                 .setColor('#0099ff')
                 .setTitle('You confused? Here ya go!')
@@ -82,13 +85,14 @@ module.exports = class FurryCommand extends Command {
                     {name:'NSFW Image Options', value:'\`bulge, kiss, yiff, gay, lesbian, shemale\`'}
                 )
                 .setThumbnail(this.client.user.avatarURL({format:"png"}))
-                .setFooter('Bot created and maintained by NovaLynxie. Image provided by FurryBotAPI.', this.client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by Yiffy API.', this.client.user.avatarURL({format:"png"}))
             return message.channel.send(helpEmbed);
         // Safe For Work sub commands, for all furry friends and anyone curious enough to see!
         // Should work for all channels, regardless if marked as NSFW or not.
         } if (option === 'boop') {
-            furrybot.furry.boop("json", 1)
+            yiffy.furry.boop("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.boop')
                     let isNsfw = false;
                     let title = 'Boop dat snoot! >w<';
                     let desc = `Hehe, its time to boop the snoot.`;
@@ -96,8 +100,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'howl') {
-            furrybot.furry.howl("json", 1)
+            yiffy.furry.howl("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.howl')
                     let isNsfw = false;
                     let title = 'Awwooo!';
                     let desc = `Howling at the moon, or whatever I guess.`;
@@ -105,8 +110,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'hug') {
-            furrybot.furry.hug("json", 1)
+            yiffy.furry.hug("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.hug')
                     let isNsfw = false;
                     let title = 'Huggy wuggies ^w^';
                     let desc = `Its time for some hugs.`;
@@ -114,8 +120,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'flop') {
-            furrybot.furry.flop("json", 1)
+            yiffy.furry.flop("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.flop')
                     let isNsfw = false;
                     let title = 'Furries do the flop?';
                     let desc = `That looks very comfy, maybe I'll also flop on someone too.`;
@@ -123,8 +130,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'hold') {
-            furrybot.furry.hold("json", 1)
+            yiffy.furry.hold("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.hold')
                     let isNsfw = false;
                     let title = 'Hold time!';
                     let desc = `Aww, they look soo cute UwU`;
@@ -132,8 +140,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'cuddle') {
-            furrybot.furry.cuddle("json", 1)
+            yiffy.furry.cuddle("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.cuddle')
                     let isNsfw = false;
                     let title = 'Cuddle wuddles!';
                     let desc = `Snuggling up with your loved ones.`;
@@ -141,8 +150,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'fursuit' || option === 'suit') {
-            furrybot.furry.fursuit("json", 1)
+            yiffy.furry.fursuit("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.fursuit')
                     let isNsfw = false;
                     let title = 'Fursuits big and small!';
                             let desc = `Lots of cute and adventurous fursuiters, ya gotta see them all!`;
@@ -152,8 +162,9 @@ module.exports = class FurryCommand extends Command {
         // Not Safe For Work sub commands. For those who have deeper, more sensual interests UwU.
         // Will only work in channels marked NSFW which the bot can send to.
         } if (option === 'lick') {
-                furrybot.furry.lick("json", 1)
+                yiffy.furry.lick("json", 1)
                     .then(res => {
+                        logger.debug('response => yiffy.furry.lick')
                         let isNsfw = true;
                         let title = `I'm a lick ya!`;
                         let desc = `N-nyahhh! That tickles x3`;
@@ -161,8 +172,9 @@ module.exports = class FurryCommand extends Command {
                     })
                 return; 
         } if (option === 'bulge') {
-            furrybot.furry.bulge("json", 1)
+            yiffy.furry.bulge("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.bulge')
                     let isNsfw = true;
                     let title = 'Those bulges... OwO';
                     let desc = `I see that bulgy wulgy >w<`;
@@ -170,8 +182,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'kiss') {
-            furrybot.furry.kiss("json", 1)
+            yiffy.furry.kiss("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.kiss')
                     let isNsfw = true;
                     let title = 'Mwahh! x3';
                     let desc = `Aww... hehe (blushes)`;
@@ -179,8 +192,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'yiff') {
-            furrybot.furry.yiff.straight("json", 1)
+            yiffy.furry.yiff.straight("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.yiff.straight')
                     let isNsfw = true;
                     let title = 'Y-yiff? O//w//O';
                     let desc = `Hehe, they're going right at it.`;
@@ -188,8 +202,9 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'gay') {
-            furrybot.furry.yiff.gay("json", 1)
+            yiffy.furry.yiff.gay("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.yiff.gay')
                     let isNsfw = true;
                     let title = 'Gay bois!';
                     let desc = `Now that is some gay stuff right there.`;
@@ -197,20 +212,22 @@ module.exports = class FurryCommand extends Command {
                 })
             return;
         } if (option === 'lesbian') {
-            furrybot.furry.yiff.lesbian("json", 1)
+            yiffy.furry.yiff.lesbian("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.yiff.lesbian')
                     let isNsfw = true;
                     let title = 'Girls need love too';
                     let desc = `Wow these girls sure be gay for each other.`;
                     furEmbed(this.client, res, isNsfw, title, desc);
                 })
             return;
-        } if (option === 'shemale') {
-            furrybot.furry.yiff.gynomorph("json", 1)
+        } if (option === 'shemale' || option === 'dickgirl' || option === 'gynomorph') {
+            yiffy.furry.yiff.gynomorph("json", 1)
                 .then(res => {
+                    logger.debug('response => yiffy.furry.yiff.gynomorph')
                     let isNsfw = true;
                     let title = 'Girls... with male junk?';
-                    let desc = `Them gals sure be showing off themselves.`;
+                    let desc = `Them gals sure be showing off their junk.`;
                     furEmbed(this.client, res, isNsfw, title, desc);
                 })
             return;

@@ -4,8 +4,8 @@ const logger = require('../../providers/WinstonPlugin');
 const { stripIndents } = require('common-tags');
 const fetch = require('node-fetch');
 const yiff = require('yiff');
-const { exxx } = require('../../../config.json');
-const e6 = new yiff.e621(exxx);
+const { eImg } = require('../../handlers/bootLoader');
+const e6 = new yiff.e621(eImg);
 
 module.exports = class FurryCommand extends Command {
     constructor(client) {
@@ -72,6 +72,7 @@ module.exports = class FurryCommand extends Command {
         }
         // furry command option handler.
         if (option === 'help') {
+            logger.debug(`Sending help embed to user's channel.`)
             const helpEmbed = new MessageEmbed()
                 .setColor('#0099ff')
                 .setTitle('You confused? Here ya go!')
@@ -87,11 +88,18 @@ module.exports = class FurryCommand extends Command {
                 .setFooter('Bot created and maintained by NovaLynxie. Image provided by FurryBotAPI.', this.client.user.avatarURL({format:"png"}))
             return message.channel.send(helpEmbed);
         } if (option === 'search') {
+            logger.debug('Requesting image from user defined tags.');
             e6.request(tags).then(res => {
+                logger.debug('Received  response! Parsing data into embed.');
                 let title = 'e621 Image Handler v1.0';
                 let desc = `You searched: ${tags}`;
                 imgEmbed(this.client, res, title, desc);
-            })
+                logger.debug('Embed sent to user channel.');
+            }).catch(err => {
+                logger.error('Whoops! An error occured.');
+                logger.error(err);
+            });
+            logger.debug('Request from user has been sent.')
         } else {
             message.reply(stripIndents`
             I was unable to process your request

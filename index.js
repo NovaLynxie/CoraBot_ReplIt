@@ -2,19 +2,6 @@
 require('dotenv').config() // load .env as early as possible
 // ================= LOGGING MODULE ===================
 const logger = require('./cora_modules/providers/WinstonPlugin');
-// ================= WEB-RES SERVER ===================
-// Simple resolver server for status responses only.
-/*
-const express = require('express');
-const app = express();
-const port = 3000;
-
-app.get('/', (req, res) => {
-  res.send('CoraBot: Response 200 - ONLINE!')
-});
-app.listen(port, () => logger.info(`CoraBot app listening to http://localhost:${port}`));
-*/
-// Simple web resolve server replaced with internal bot server.
 // ================= START BOT CODE ===================
 const { CommandoClient, /*SQLiteProvider*/ } = require('discord.js-commando');
 const { Structures } = require('discord.js');
@@ -22,20 +9,15 @@ const { Structures } = require('discord.js');
 // Requiring bot's own modules here for usage.
 logger.info('Initialising bot systems...')
 // Boot.js used to handle bot startup and config loader.
-const {config} = require('./cora_modules/handlers/bootLoader.js');
-const {prefix, debug, botToken, ownerID, activities} = config;
-logger.info('Loading additional bot modules...');
-const crashReporter = require('./cora_modules/handlers/crashReporter.js');
-logger.debug('Loaded crashReporter functions from crashReporter.js');
-const autoRespond = require('./cora_modules/handlers/autoRespond.js');
-logger.debug('Loaded autoRespond functions from autoRespond.js');
+const {botConfig, assets, handlers} = require('./cora_modules/handlers/bootLoader.js');
+const {prefix, debug, botToken, ownerID} = botConfig;
+const {crashReporter, autoRespond} = handlers;
+const {activities} = assets;
 // ------------------- Bot's Modules ------------------
 // Dashboard interface for the discord bot. (WIP)
-require('./cora_modules/dashboard/server'); // spin up built-in server
+require('./cora_modules/dashboard/dashsrv'); // spin up built-in server
 // May use alternative options if problems arise.
-
 const path = require('path'); // Loads path library for code file to use file directories.
-
 // Load up the module for the dashboard.
 const Dashboard = require("discord-bot-dashboard"); 
 // Dashboard using development branch version as current npm version is broken at this time. May break unexpectedly!
