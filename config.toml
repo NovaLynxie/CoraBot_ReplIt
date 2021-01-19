@@ -16,9 +16,6 @@ debug = false
 # If this is left blank, the bot will try to use a temporary name in useragent. 
 # This is not recommended as requests from this bot may get blocked by the system.
 clientName = "corabot-discord"
-# API Key for usage with the yiffy module in api calls to yiff.rest for furry command.
-yiffyApiKey = "fd62880ca8d758f54c62e96a97d33a8e2bcb79b9"
-# Required for request calls to Yiffy's API.
 
 [discordbot.automod]
 # Bot auto moderation settings
