@@ -5,7 +5,7 @@
 [discordbot.general]
 # Bot general settings.
 # Set the bot's prefix for commands and other options here.
-prefix = "p"
+prefix = "c"
 # Bot Modules. To enable them, change from false to true.
 # Developer only setting! Use this only for debugging the config file.
 debug = false
