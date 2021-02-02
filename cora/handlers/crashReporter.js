@@ -22,9 +22,10 @@ function timeStamp (date) {
 module.exports = function crashReporter (error) {
   let date = new Date();
   logstamp = timeStamp(date);
-  let filepath = `./../crash-reports/crash-${logstamp}.txt`
-  let crashdata = `Exception thrown! Log saved to ${filepath}.\n
+  let filepath = `./logs/crash-reports/crash-${logstamp}.txt`
+  let crashdata = `Exception thrown! Log saved to ${filepath}. 
     Caused by: ${error.stack}`
+  
   fs.writeFile(filepath, crashdata, function(error) {
     logger.error(`Something went wrong while writing crash report!`)
     logger.error(`Caused by: ${error}`)

@@ -1,7 +1,9 @@
 // ================== PROCESS.ENV =====================
 require('dotenv').config() // load .env as early as possible
 // ================= LOGGING MODULE ===================
-const logger = require('./cora_modules/providers/WinstonPlugin');
+const logger = require('./cora/providers/WinstonPlugin');
+const {version} = require('./package.json');
+logger.info(`CoraBot v${version}`)
 // ================= START BOT CODE ===================
 const { CommandoClient, /*SQLiteProvider*/ } = require('discord.js-commando');
 const { Structures } = require('discord.js');
@@ -9,13 +11,21 @@ const { Structures } = require('discord.js');
 // Requiring bot's own modules here for usage.
 logger.info('Initialising bot systems...')
 // Boot.js used to handle bot startup and config loader.
-const {botConfig, assets, handlers} = require('./cora_modules/handlers/bootLoader.js');
-const {prefix, debug, botToken, ownerID} = botConfig;
-const {crashReporter, autoRespond} = handlers;
+const {config, assets, handlers} = require('./cora/handlers/bootLoader.js');
 const {activities} = assets;
+const {prefix, debug, botToken, ownerID} = config
+// Load bot handlers here before bot starts.
+logger.info('Connecting modules to main core...');
+const crashReporter = require('./cora/handlers/crashReporter.js');
+logger.debug('Loaded crashReporter functions from crashReporter.js');
+const autoRespond = require('./cora/modules/autoResponder.js');
+logger.debug('Loaded autoRespond functions from autoResponder.js');
+const autoModerator = require('./cora/modules/autoModerator.js');
+logger.debug('Loaded autoModerator functions from autoModerator.js')
+logger.info('Modules connected and initialized!')
 // ------------------- Bot's Modules ------------------
 // Dashboard interface for the discord bot. (WIP)
-require('./cora_modules/dashboard/dashsrv'); // spin up built-in server
+require('./cora/dashboard/dashsrv'); // spin up built-in server
 // May use alternative options if problems arise.
 const path = require('path'); // Loads path library for code file to use file directories.
 // Load up the module for the dashboard.
@@ -64,7 +74,8 @@ client.registry
         help: false,
     })
     .registerCommandsIn(
-        path.join(__dirname, './cora_modules/commands')
+        path.join(__dirname, './cora/commands')
+        //path.join(__dirname, './cora_modules/commands')
     );
 
 client.once('ready', () => {
@@ -123,6 +134,7 @@ client.on('message', (message) => {
         logger.debug('Prefix detected! Ignoring as command request.')
         return;
     }
+    //autoRespond(message);
     autoRespond(message);
 });
 client.on('error', error => {

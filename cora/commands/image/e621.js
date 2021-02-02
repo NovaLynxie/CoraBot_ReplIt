@@ -77,15 +77,11 @@ module.exports = class FurryCommand extends Command {
                 .setColor('#0099ff')
                 .setTitle('You confused? Here ya go!')
                 .setDescription(stripIndents`
-                    Here are the subcommands for the \`furry\` command.
-                    *NSFW Sub-commands will only work in nsfw marked channels*
+                    To start a search, use \`e621 search\` then type in your tags.
+                    For multiple word tags use underscore \`_\` between each word like so: \`multi_tag_word\`
                 `)
-                .addFields(
-                    {name:'SFW Image Options', value:'\`hug, flop, boop, hold, cuddle\`'},
-                    {name:'NSFW Image Options', value:'\`gay, lesbian, shemale\`'}
-                )
                 .setThumbnail(this.client.user.avatarURL({format:"png"}))
-                .setFooter('Bot created and maintained by NovaLynxie. Image provided by FurryBotAPI.', this.client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by e621 API.', this.client.user.avatarURL({format:"png"}))
             return message.channel.send(helpEmbed);
         } if (option === 'search') {
             logger.debug('Requesting image from user defined tags.');

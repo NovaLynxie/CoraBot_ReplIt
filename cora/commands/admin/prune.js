@@ -54,7 +54,7 @@ module.exports = class PruneCommand extends Command {
     async run(message, { limit, filter, member }) {
 		var channel = message.guild.channels.cache.find(ch => ch.name === 'moderation-log')
 		let messageFilter;
-		console.log("[Cora] Initializing message removal protocols...")
+		logger.info("Initializing message removal protocols...")
 		try {
 			if (!channel) {
                 message.say(stripIndents`
@@ -63,8 +63,8 @@ module.exports = class PruneCommand extends Command {
                 Please contact my owner or higher ups immediately as as I cannot log mod actions without one!
                 \`\`\`Error! Missing channel/permissions for channel #moderation-log\`\`\`
                 `)
-                logger.error('[Error] Missing channel or permissions invalid! Unable to log message removal action!')
-                logger.warn('[Warn] Moderation action has not been saved correctly, check error message.')
+                logger.error('Missing channel or permissions invalid! Unable to log message removal action!')
+                logger.warn('Moderation action has not been saved correctly, check error message.')
 				return
 			}
 			if (!limit) {
@@ -128,8 +128,9 @@ module.exports = class PruneCommand extends Command {
 			logger.info(`Logged action to moderation-logs`)
 			return channel.send(logEmbed);
 		} catch (err) {
-			logger.error(`[Severe] Exception Error! An error has occured in the prune command!`)
+			logger.error(`Exception Error! An error has occured in the prune command!`)
 			logger.error(err);
+      logger.debug(err.stack);
 			return message.say(`An error occured while running this command, please try again.`)
         }
     }

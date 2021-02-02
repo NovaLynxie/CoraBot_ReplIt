@@ -6,7 +6,7 @@ const logger = require('../providers/WinstonPlugin');
 const fs = require('fs');
 // Config loader (TOML Localised File Handler)
 const toml = require('toml'); // Enables parsing of *.toml files
-const config = toml.parse(fs.readFileSync('./config.toml', function (err){
+const configData = toml.parse(fs.readFileSync('./config.toml', function (err){
   logger.debug(`Error while reading file...`)
   logger.debug(err)
   logger.warn(`Is file missing or unreadable?`)
@@ -15,11 +15,10 @@ const config = toml.parse(fs.readFileSync('./config.toml', function (err){
 //const { discordbot, dashboard } = config; 
 //global dashboard setting depreciated, moved to discordbot.dashboard
 const { version } = require('../../package.json');
-const { discordbot } = config;
-const { general, automod, dashboard, images } = discordbot;
-const { clientName } = images;
-const { enableAutoMod, whitelistedChannels} = automod;
+const { general, images, autoModerator, dashboard } = configData;
 const { prefix, debug } = general;
+const { enableAutoMod, whitelistMode, channelsList, mediaOptions } = autoModerator;
+const { clientName, yiffyApiKey } = images;
 const { port } = dashboard; // Depreciated in favour of custom built-in dashboard.
 logger.debug(`prefix = ${prefix} (${typeof prefix})`);
 logger.debug(`debug = ${debug} (${typeof debug})`);
@@ -48,7 +47,7 @@ var eImg = { // Required to use e621 and e926 modules.
 // Yiffy UserAgent for CoraBot. Required otherwise it will fail to work correctly.
 const myUserAgent = `CoraBot/${version} (https://github.com/NovaLynxie/CoraBot_ReplIt)`
 // Load bot secrets from process.env if this fails use config vars.
-var { botToken, yiffyApiKey, ownerID } = process.env;
+var { botToken, ownerID } = process.env;
 logger.debug('Loaded process environment variables!');
 // Load bot assets from folders as necessary.
 logger.info('Loading bot assets...')
@@ -56,16 +55,7 @@ const { activities } = require('../assets/json/activities.json');
 logger.debug('Loaded activities from activities.json');
 const { responses } = require('../assets/json/responses.json');
 logger.debug('Loaded responses from responses.json');
-// Load bot handlers here before bot starts.
-logger.info('Loading bot modules...');
-const crashReporter = require('../handlers/crashReporter.js');
-logger.debug('Loaded crashReporter functions from crashReporter.js');
-const autoRespond = require('../modules/autoResponder.js');
-const { User } = require('discord.js');
-logger.debug('Loaded autoRespond functions from autoResponder.js');
-
 // Finally export all variables for the bot to access by requiring bootLoader.js
-module.exports.botConfig = {prefix, debug, botToken, ownerID, eImg, myUserAgent, yiffyApiKey, version}; // bot config
-module.exports.autoMod = {enableAutoMod, whitelistedChannels}; // bot automod
+module.exports.config = {prefix, debug, botToken, ownerID, eImg, myUserAgent, yiffyApiKey, version}; // bot config
+module.exports.autoMod = {enableAutoMod, whitelistMode, channelsList, mediaOptions}; // bot automod
 module.exports.assets = {activities, responses}; // bot asset data
-module.exports.handlers = {crashReporter, autoRespond}; // bot handlers

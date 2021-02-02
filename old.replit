@@ -1,0 +1,6 @@
+language="node.js"
+run="""
+export
+PATH="$PWD/node_modules/ffmpeg-static:$PATH"
+node app.js
+"""

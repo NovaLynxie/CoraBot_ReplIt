@@ -1,6 +1,6 @@
 {
   "name": "corabot",
-  "version": "2.3.1",
+  "version": "2.4.1",
   "private": true,
   "description": "Discord Bot for CoraLynx",
   "main": "app.js",
@@ -9,8 +9,8 @@
     "npm": "6.x"
   },
   "scripts": {
-    "test": "echo \"Warn: no test specified\" && exit 0",
-    "setup": "node ./cora_modules/internal/setup.js",
+    "test": "node ./cora/internal/fileSelfTest.js",
+    "setup": "node ./cora/internal/newConfig.js",
     "start": "node app.js"
   },
   "keywords": [

@@ -71,24 +71,16 @@ module.exports = class FurryCommand extends Command {
         }
         // furry command option handler.
         if (option === 'help') {
+            logger.debug(`Sending help embed to user's channel.`)
             const helpEmbed = new MessageEmbed()
                 .setColor('#0099ff')
                 .setTitle('You confused? Here ya go!')
                 .setDescription(stripIndents`
-                    Searches e926 using the tags put into the chat.
+                    To start a search, use \`e621 search\` then type in your tags.
+                    For multiple word tags use underscore \`_\` between each word like so: \`multi_tag_word\`
                 `)
-                .addField(
-                    {
-                        name:`No image shows up?`, 
-                        value:stripIndents`
-                        Check your spelling of the tags you entered and try searching again.
-                        If the tag is a multi-word tag, type it like this: 
-                        \`example_tag\` will evaluate as one singular tag
-                        \`example tag\` will evaluate `
-                    }
-                )
                 .setThumbnail(this.client.user.avatarURL({format:"png"}))
-                .setFooter('Bot created and maintained by NovaLynxie. Image provided by FurryBotAPI.', this.client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by e926 API.', this.client.user.avatarURL({format:"png"}))
             return message.channel.send(helpEmbed);
         } if (option === 'search') {
             logger.debug('Requesting image from user defined tags.');
