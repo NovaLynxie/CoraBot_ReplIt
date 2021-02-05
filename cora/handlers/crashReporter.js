@@ -21,7 +21,7 @@ function timeStamp (date) {
 }
 module.exports = function crashReporter (error) {
   let date = new Date();
-  logstamp = timeStamp(date);
+  let logstamp = timeStamp(date);
   let filepath = `./logs/crash-reports/crash-${logstamp}.txt`
   let crashdata = `Exception thrown! Log saved to ${filepath}. 
     Caused by: ${error.stack}`
