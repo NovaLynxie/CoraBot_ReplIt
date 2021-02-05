@@ -2,6 +2,7 @@ const { Command } = require('discord.js-commando');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const mcsutil = require('minecraft-server-util');
+const base64img = require('node-base64-img');
 const logger = require('../../providers/WinstonPlugin');
 
 module.exports = class MCSrvInfoCommand extends Command {
@@ -44,7 +45,15 @@ module.exports = class MCSrvInfoCommand extends Command {
         return;
       }
     }
-    ip.match()
+    async function b64toImg(req) { // unused, bit unreliable
+      logger.debug('parsing base64 string to file...')
+      const res = await base64img(req, './assets/cache/', 'mclogo', {type: 'png'}).catch(err => {
+        logger.error('errored while parsing input string!')
+        logger.error(err);
+      })
+      logger.debug('parsed input string to file successful!')
+      return res;
+    }
     try {
       mcsutil.status(ip, {port:port ? port : 25565}).then(async (res) => {
         logger.debug(`Recieving data from mc.status() into 'res'`);

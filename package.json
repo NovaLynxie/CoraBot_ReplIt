@@ -1,6 +1,6 @@
 {
   "name": "corabot",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "private": true,
   "description": "Discord Bot for CoraLynx",
   "main": "app.js",
@@ -26,8 +26,8 @@
     "discord.js": "github:discordjs/discord.js",
     "discord.js-commando": "github:discordjs/Commando",
     "dotenv": "^8.2.0",
-    "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "ffmpeg-static": "^4.2.7",
     "furrybotapi": "^2.0.10",
     "log-timestamp": "^0.3.0",
     "minecraft-server-util": "^3.4.2",
@@ -41,6 +41,7 @@
     "toml": "^3.0.0",
     "winston": "^3.2.1",
     "yiff": "^2.0.2",
-    "yiffy": "^2.0.8"
+    "yiffy": "^2.0.8",
+    "ytdl-core": "^4.4.5"
   }
 }
