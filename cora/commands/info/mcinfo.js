@@ -2,7 +2,6 @@ const { Command } = require('discord.js-commando');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const mcsutil = require('minecraft-server-util');
-const base64img = require('node-base64-img');
 const logger = require('../../providers/WinstonPlugin');
 
 module.exports = class MCSrvInfoCommand extends Command {
@@ -41,18 +40,17 @@ module.exports = class MCSrvInfoCommand extends Command {
     function hostValidator(ip) {
       if (ip == 'localhost') {
         logger.warn('Ignoring localhost as this would send request to local network of bot and most likely fail.');
-        message.reply(`I can't parse that! That would send those requests into my host's mainframe!`);
+        message.reply(`I can't accept localhost requests! That would send those requests into my host's mainframe!`);
         return;
       }
     }
-    async function b64toImg(req) { // unused, bit unreliable
-      logger.debug('parsing base64 string to file...')
-      const res = await base64img(req, './assets/cache/', 'mclogo', {type: 'png'}).catch(err => {
-        logger.error('errored while parsing input string!')
-        logger.error(err);
+    async function b64ToFile(b64data) {
+      logger.debug('Parsing base64 string into file.')
+      let b64str = b64data.split(';base64,').pop()
+      fs.writeFile('./cora/cache/mcsrvutil/mcsrvlogo.png', b64str, {encoding:'base64'}, function(err) {
+        if (err) return logger.error(err)
+        logger.debug('Successfully wrote data to file!')
       })
-      logger.debug('parsed input string to file successful!')
-      return res;
     }
     try {
       mcsutil.status(ip, {port:port ? port : 25565}).then(async (res) => {
