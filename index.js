@@ -64,7 +64,7 @@ client.registry
         ['image','Images'],
         ['info', 'Information'],
         ['misc', 'Miscellaneous'],
-        //['music', 'Music'], // Disabled - Not available in this version.
+        ['music', 'Music'], // Experimental! - May have some unexpected errors.
         //['social', 'Social'], // Disabled - Does not have any commands.
         ['support', 'Support'],
     ])
