@@ -2,3 +2,4 @@ config.toml
 ./temp/
 *.replit
 ./cora/cache/
+./cora/temp/
