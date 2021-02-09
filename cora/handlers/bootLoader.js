@@ -49,6 +49,20 @@ const myUserAgent = `CoraBot/${version} (https://github.com/NovaLynxie/CoraBot_R
 // Load bot secrets from process.env if this fails use config vars.
 var { botToken, ownerID } = process.env;
 logger.debug('Loaded process environment variables!');
+// Generate some folders on bot startup.
+let dirpaths = ['./cora/cache/automod/','./cora/cache/mcsrvutil/']
+dirpaths.forEach(async (dirpath) => {
+  await fs.mkdir(dirpath, {recursive: true}, function (err) {
+    if (err) {
+      if (err.code === 'ENOENT') {
+        logger.debug(`Missing directory ${dirpath}! Generating now...`)
+      } else {
+        logger.debug(`Could not make directory or another problem occured.`)
+        logger.debug(err.stack)
+      }
+    };
+  })
+})
 // Load bot assets from folders as necessary.
 logger.info('Loading bot assets...')
 const { activities } = require('../assets/json/activities.json');

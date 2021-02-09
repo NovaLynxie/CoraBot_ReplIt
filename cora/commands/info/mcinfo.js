@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 const { stripIndents } = require('common-tags');
+const fs = require('fs');
 const mcsutil = require('minecraft-server-util');
 const logger = require('../../providers/WinstonPlugin');
 
@@ -56,8 +57,12 @@ module.exports = class MCSrvInfoCommand extends Command {
       mcsutil.status(ip, {port:port ? port : 25565}).then(async (res) => {
         logger.debug(`Recieving data from mc.status() into 'res'`);
         let motd = res.description.descriptionText.replace(/\u00A7[0-9A-FK-OR]/ig,'')
+        await b64ToFile(res.favicon); // get image for server
+        const attachment = new MessageAttachment('./cora/cache/mcsrvutil/mcsrvlogo.png', 'mcsrvlogo.png');
         const mcEmbed = new MessageEmbed()
           .setColor('#926F4F')
+          .attachFiles(attachment)
+          .setThumbnail('attachment://mcsrvlogo.png')
           .setTitle('Minecraft Server Information')
           .addFields(
             {name:'Server IP', value: res.host, inline:true},
