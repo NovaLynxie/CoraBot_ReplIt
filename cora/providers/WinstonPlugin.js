@@ -1,5 +1,6 @@
 require('dotenv').config() // load .env as early as possible
 const winston = require('winston');
+//require('winston-daily-rotate-file'); // does not work, disabled.
 const {addColors, createLogger, format, transports} = winston
 const {combine, colorize, errors, json, timestamp, printf} = format;
 var {logLevel} = process.env; // gets logLevel from os process.env vars
@@ -35,7 +36,7 @@ addColors(customLevels.colors);
 const logger = createLogger({
   levels: customLevels.levels,
     format: combine(
-      timestamp({format: 'DD-MM-YYYY HH:mm:ss ZZ'}),
+      timestamp({format: 'DD-MM-YYYY HH:mm:ss'}),
       printf(info => `(${info.timestamp}) [${info.level}] ${info.message}`),
       errors({stack: true}),
   ),
@@ -51,6 +52,32 @@ const logger = createLogger({
       ),
       handleExceptions: true
     }),
+    // File transports created here.
+    new transports.File({
+      level: 'error',
+      format: combine(
+        timestamp({
+          format: 'DD-MM-YY HH:mm:ss ZZ'
+        })
+      ),
+      filename: './logs/latest.log',
+      zippedArchive: false,
+      maxSize: '10m',
+      maxFiles: '7d'
+    }),
+    new transports.File({      
+      level: 'debug',
+      format: combine(
+        format.splat(),
+        format.timestamp({
+          format: 'YYYY-MM-DD HH:mm:ss ZZ'
+        })
+      ),
+      filename: './logs/debug.log',
+      zippedArchive: false,
+      maxSize: '10m',
+      maxFiles: '7d'
+    })
   ],
 });
 

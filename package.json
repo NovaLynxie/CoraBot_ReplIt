@@ -1,6 +1,6 @@
 {
   "name": "corabot",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "private": true,
   "description": "Discord Bot for CoraLynx",
   "main": "app.js",
@@ -40,6 +40,7 @@
     "sqlite": "^4.0.2",
     "toml": "^3.0.0",
     "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.5.0",
     "yiff": "^2.0.2",
     "yiffy": "^2.0.8",
     "ytdl-core": "^4.4.5"

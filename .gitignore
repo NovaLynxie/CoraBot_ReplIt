@@ -1,5 +1,6 @@
 config.toml
-./temp/
 *.replit
-./cora/cache/
+./temp/
+./logs/
 ./cora/temp/
+./cora/cache/
