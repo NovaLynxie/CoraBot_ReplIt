@@ -51,32 +51,6 @@ const logger = createLogger({
         printf(info => `(${info.timestamp}) [${info.level}] ${info.message}`),
       ),
       handleExceptions: true
-    }),
-    // File transports created here.
-    new transports.File({
-      level: 'error',
-      format: combine(
-        timestamp({
-          format: 'DD-MM-YY HH:mm:ss ZZ'
-        })
-      ),
-      filename: './logs/latest.log',
-      zippedArchive: false,
-      maxSize: '10m',
-      maxFiles: '7d'
-    }),
-    new transports.File({      
-      level: 'debug',
-      format: combine(
-        format.splat(),
-        format.timestamp({
-          format: 'YYYY-MM-DD HH:mm:ss ZZ'
-        })
-      ),
-      filename: './logs/debug.log',
-      zippedArchive: false,
-      maxSize: '10m',
-      maxFiles: '7d'
     })
   ],
 });

@@ -7,7 +7,7 @@ module.exports = class helpDescCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'help', //May conflict with built-in if enabled. 
-            aliases: ['ask','cmds'],
+            aliases: ['ask','cmds','h'],
             group: 'info',
             memberName: 'helpinfo',
             description: 'Shows help to the user.',
@@ -44,7 +44,7 @@ module.exports = class helpDescCommand extends Command {
             return message.channel.send(helpEmbed)
         }
         if(args.command && !showAll) {
-            logger.info(`Looking for ${args.command} in commands...`)
+            logger.debug(`Looking for ${args.command} in commands...`)
             if(commands.length === 1){
                 let helpDesc = stripIndents`
                     ${oneLine`

@@ -16,7 +16,9 @@ module.exports = class MCSrvInfoCommand extends Command {
         details: stripIndents`
           Displays basic information about a minecraft server from provided server ip and port. 
           This command supports requests to **java edition** servers **only**!
-          Any requests to other servers from bedrock, mcpe, or unsupported editions **will fail**.`,
+          Any requests to other servers from bedrock, mcpe, or unsupported editions **will fail**.
+          *Support for other editions might be added in a future update.*`,
+          examples: ['mcinfo examplehost.com', 'mcinfo examplehost.com 25565'],
         guildOnly: false,
         args: [
           {
@@ -33,10 +35,17 @@ module.exports = class MCSrvInfoCommand extends Command {
             type: 'integer',
             default: 25565 // defaults to 25565 if none is provided
           },
+          {
+            key: 'options',
+            prompt: 'mc.info.command.prompt_options',
+            type: 'string',
+            default: 'status'
+          }
         ]
     });
   }
-  async run(message, {ip, port}) {
+  async run(message, {ip, port, options}) {
+    options=options.toLowerCase();
     logger.debug(`ip=${ip}; port=${port};`);
     function hostValidator(ip) {
       if (ip == 'localhost') {
@@ -44,6 +53,44 @@ module.exports = class MCSrvInfoCommand extends Command {
         message.reply(`I can't parse that! That would send those requests into my host's mainframe!`);
         return;
       }
+    }
+    function newMCEmbed(res) {
+      const attachment = new MessageAttachment('./cora/cache/mcsrvutil/mcsrvlogo.png', 'mcsrvlogo.png');
+      let motd = res.description.descriptionText.replace(/\u00A7[0-9A-FK-OR]/ig,'')
+      const mcEmbed = new MessageEmbed()
+            .setColor('#926F4F')
+            .attachFiles(attachment)
+            .setThumbnail('attachment://mcsrvlogo.png')
+            .setTitle('Minecraft Server Information')
+            .addFields(
+              {name:'Server IP', value: res.host, inline:true},
+              {name:'Server Port', value: res.port, inline:true},
+              {name:'Players Online/Maximum', value: `${res.onlinePlayers}/${res.maxPlayers}`, inline:true},
+              {name:'Server Description', value: motd}
+            )
+            .setFooter('Powered by Minecraft Server Util.')
+          //message.channel.send({files: [mcImg], embed: mcEmbed});
+          message.channel.send(mcEmbed);
+    }
+    function newErrEmbed(err) {
+      const errEmbed = new MessageEmbed()
+        .setColor('#926F4F')
+        .setTitle('Minecraft Server Information')
+        .setDescription(stripIndents`
+          Hmm... well this is awkward... :sweat:
+          The requested server ip address did not return any valid response, the request timed out or an error occured while processing the request.
+          Possible Causes:
+          > 1. It might be offline, server ip is invalid or the request has timed out.
+          > 2. An error occured while processing the data to the embed.
+          If the server ip you entered is valid and server is responding, contact my owner for help.`)
+        .setFooter('Powered by Minecraft Server Util.')
+      if (err) {
+        logger.error('An error occured while processing the request!')
+        logger.error(err ? !undefined : 'Unknown error!');
+        logger.debug(err.stack? !undefined : 'No error stacktrace available.');
+        logger.warn('Any incoming data may have been discarded.')
+      }
+      return message.channel.send(errEmbed);
     }
     async function b64ToFile(b64data) {
       logger.debug('Parsing base64 string into file.')
@@ -54,45 +101,34 @@ module.exports = class MCSrvInfoCommand extends Command {
       })
     }
     try {
-      mcsutil.status(ip, {port:port ? port : 25565}).then(async (res) => {
-        logger.debug(`Recieving data from mc.status() into 'res'`);
-        let motd = res.description.descriptionText.replace(/\u00A7[0-9A-FK-OR]/ig,'')
-        await b64ToFile(res.favicon); // get image for server
-        const attachment = new MessageAttachment('./cora/cache/mcsrvutil/mcsrvlogo.png', 'mcsrvlogo.png');
-        const mcEmbed = new MessageEmbed()
-          .setColor('#926F4F')
-          .attachFiles(attachment)
-          .setThumbnail('attachment://mcsrvlogo.png')
-          .setTitle('Minecraft Server Information')
-          .addFields(
-            {name:'Server IP', value: res.host, inline:true},
-            {name:'Server Port', value: res.port, inline:true},
-            {name:'Players Online/Maximum', value: `${res.onlinePlayers}/${res.maxPlayers}`, inline:true},
-            {name:'Server Description', value: motd}
-          )
-          .setFooter('Powered by Minecraft Server Util.')
-        //message.channel.send({files: [mcImg], embed: mcEmbed});
-        message.channel.send(mcEmbed);
-      }).catch ((err) => {
-        const errEmbed = new MessageEmbed()
-          .setColor('#926F4F')
-          .setTitle('Minecraft Server Information')
-          .setDescription(stripIndents`
-            Hmm... well this is awkward... :sweat:
-            The requested server ip address did not return any valid response, the request timed out or an error occured while processing the request.
-            Possible Causes:
-            > 1. It might be offline, server ip is invalid or the request has timed out.
-            > 2. An error occured while processing the data to the embed.
-            If the server ip you entered is valid and server is responding, contact my owner for help.`)
-          .setFooter('Powered by Minecraft Server Util.')
-        message.channel.send(errEmbed);
-        if (err) {
-          logger.error('An error occured while processing the request!')
-          logger.error(err);
-          logger.debug(err.stack);
-          logger.warn('Any incoming data may have been discarded.')
-        }
-      });
+      if (options==='s'||options==='status') {
+        mcsutil.status(ip, {port:port ? port : 25565}).then(async (res) => {
+          logger.debug(`Recieving data from mc.status() into 'res'`);
+          await b64ToFile(res.favicon); // get image for server
+          newMCEmbed(res)
+        }).catch ((err) => {
+          newErrEmbed(err)
+        });
+      } else 
+      if (options==='q'||options==='query') {
+        mcsutil.query(ip, {port:port ? port : 25565}).then(async (res) => {
+          logger.debug(`Recieving data from mc.status() into 'res'`);
+          await b64ToFile(res.favicon); // get image for server
+          newMCEmbed(res)
+        }).catch ((err) => {
+          newErrEmbed(err)
+        });
+      } else 
+      if (options==='qf'||options==='queryfull') {
+        mcsutil.queryFull(ip, {port:port ? port : 25565}).then(async (res) => {
+          logger.debug(`Recieving data from mc.status() into 'res'`);
+          await b64ToFile(res.favicon); // get image for server
+          newMCEmbed(res)
+        }).catch ((err) => {
+          newErrEmbed(err)
+        });
+      }
+      
     } catch (error) {
       logger.error('Error occured while processing request!');
       logger.error(error ? !undefined : 'Unknown error.');
