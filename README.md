@@ -1,6 +1,7 @@
 # CoraBot_ReplIt
-A modified version of CoraBot's code for use with Replit. This version does not have music functionality due to replit limitations.
 UPDATE! CoraBot now has its music functionality back as repl.it now supports music bot functionality!
+A modified version of CoraBot's code for use with Replit. ~~This version does not have music functionality due to replit limitations.~~
+
 
 # About Cora
  Hi there! My name is Cora. I am NovaLynxie's personal discord bot built using discord.js on nodejs.
