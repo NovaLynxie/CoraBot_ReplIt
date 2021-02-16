@@ -21,8 +21,6 @@ module.exports = class WoofCommand extends Command {
           let url = json.url
           generateEmbed(url)
         })
-      const { url } = await fetch('https://random.dog/woof.json')
-      console.log('url:'+url)
       function generateEmbed(url) {
         const embed = new MessageEmbed()
           .setColor(0x00AE86)

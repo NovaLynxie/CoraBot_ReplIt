@@ -11,7 +11,7 @@ const { Structures } = require('discord.js');
 // Requiring bot's own modules here for usage.
 logger.info('Initialising bot systems...')
 // Boot.js used to handle bot startup and config loader.
-const {config, assets, handlers} = require('./cora/handlers/bootLoader.js');
+const {config, assets} = require('./cora/handlers/bootLoader.js');
 const {activities} = assets;
 const {prefix, debug, botToken, ownerID} = config
 // Load bot handlers here before bot starts.
@@ -22,15 +22,16 @@ const autoRespond = require('./cora/modules/autoResponder.js');
 logger.debug('Loaded autoRespond functions from autoResponder.js');
 const autoModerator = require('./cora/modules/autoModerator.js');
 logger.debug('Loaded autoModerator functions from autoModerator.js')
+const Database = require("@replit/database");
 logger.info('Modules connected and initialized!')
 // ------------------- Bot's Modules ------------------
 // Dashboard interface for the discord bot. (WIP)
 require('./cora/dashboard/dashsrv'); // spin up built-in server
 // May use alternative options if problems arise.
-const path = require('path'); // Loads path library for code file to use file directories.
-// Load up the module for the dashboard.
-const Dashboard = require("discord-bot-dashboard"); 
+// Load up the module for the dashboard. (Alternative)
+const Dashboard = require("discord-bot-dashboard"); //Currently unused.
 // Dashboard using development branch version as current npm version is broken at this time. May break unexpectedly!
+const path = require('path'); // Loads path library for code file to use file directories.
 
 Structures.extend('Guild', Guild => {
     class MusicGuild extends Guild {
@@ -48,6 +49,8 @@ Structures.extend('Guild', Guild => {
     }
     return MusicGuild;
 });
+
+const db = new Database()
 
 const client = new CommandoClient({
     commandPrefix: prefix,
@@ -78,13 +81,39 @@ client.registry
         //path.join(__dirname, './cora_modules/commands')
     );
 
+
+async function updateDB() {
+  let totalGuilds = client.guilds.cache.size;
+  let totalMembers = client.users.cache.size;
+  let allChannels = client.channels.cache.filter(ch=>ch.type!=='category').size;
+  let voiceChannels = client.channels.cache.filter(ch=>ch.type==='voice').size;
+  let textChannels = client.channels.cache.filter(ch=>ch.type==='text').size;
+  // repldb updater
+  logger.debug('running task update_database')
+  logger.debug(`assigning guilds as ${totalGuilds}`)
+  await db.set("guilds", totalGuilds);
+  logger.debug(`assigning channels as ${allChannels}`)
+  await db.set("allChannels", allChannels);
+  logger.debug(`assigning users as ${totalMembers}`)
+  await db.set("members", totalMembers);
+  logger.debug(`assigning channels as ${voiceChannels}`)
+  await db.set("voiceChannels", voiceChannels);
+  logger.debug(`assigning channels as ${textChannels}`)
+  await db.set("textChannels", textChannels);
+  logger.debug('completed successfully!')
+}
+
 client.once('ready', () => {
     logger.info(`Logged in as ${client.user.tag}! (${client.user.id})`);
+    updateDB();
     client.user.setActivity('with Commando');
 });
 
 client.on('ready', () => {
-  setInterval(() => {
+  setInterval(async () => {
+    // repldb updater
+    await updateDB();
+    // status updater
     const index = Math.floor(Math.random() * (activities.length - 1) + 1);
     if (index >= 0 && index <= 1) {
       var statusType = 1 // 1 - Playing
@@ -116,12 +145,10 @@ process.on('uncaughtException', error => {
 client.on('guildMemberUpdate', (oldMember, newMember) => {
     const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
     if (removedRoles.size > 0) {
-        //console.log(`[Cora] Role ${removedRoles.map(r=>r.name)} removed from ${oldMember.displayName}.`)
         logger.info(`Role ${removedRoles.map(r=>r.name)} removed from ${oldMember.displayName}.`)
     };
     const addedRoles = newMember.roles.cache.filter(role=>!oldMember.roles.cache.has(role.id));
     if (addedRoles.size > 0) {
-        //console.log(`[Cora] Role ${addedRoles.map(r=>r.name)} added to ${oldMember.displayName}.`)
         logger.info(`Role ${addedRoles.map(r=>r.name)} added to ${oldMember.displayName}.`)
     };
 });
@@ -134,11 +161,9 @@ client.on('message', (message) => {
         logger.debug('Prefix detected! Ignoring as command request.')
         return;
     }
-    //autoRespond(message);
     autoRespond(message);
 });
 client.on('error', error => {
-    //console.error('[Error]', error)
     logger.error('Exception thrown by Bot Client!')
     logger.error(error.stack)
 });
@@ -148,5 +173,4 @@ client.login(botToken).catch(err => {
     logger.error('Bot token is INVALID! Login aborted.')
     logger.error('Please check the bot token in config vars and restart the bot.')
     logger.error(err);
-
 });
