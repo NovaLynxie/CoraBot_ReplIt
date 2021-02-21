@@ -2,20 +2,30 @@ const { Command } = require('discord.js-commando');
 const { MessageEmbed, MessageFlags } = require('discord.js');
 const logger = require('../../providers/WinstonPlugin');
 const { stripIndents } = require('common-tags');
-const Animage = require('animage');
+const {cheweyApiToken} = process.env;
+const cheweyBot = require('cheweybot-api');
+cheweyBot.init(cheweyApiToken)
 
-module.exports = class FurryCommand extends Command {
+module.exports = class AnimalsCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'animals',
+            name: 'animal',
             group: 'image',
-            memberName: 'animals',
-            description: 'Some cute animal images',
-            examples: ['animals <option>'],
+            memberName: 'animal',
+            description: 'Some fun furry images using CheweyBotAPI.',
+            details: stripIndents`
+                This command provides a bunch of cute and adorable animal images.
+                From our feathered birds, cute bleps, ~~to the wild animals such as foxes, cheetas, wolves and lynxes~~. 
+                Service provided by CheweyBotAPI, please **do not** abuse this command.`,
+            examples: ['animal <option>'],
+            throttling: {
+                usages: 1,
+                duration: 3
+            },
             args: [
                 {
                     key: 'option',
-                    prompt: 'animals.command.prompt.option',
+                    prompt: 'animal.command.prompt.option',
                     default: '',
                     type: 'string'
                 }
@@ -24,9 +34,19 @@ module.exports = class FurryCommand extends Command {
     }
     async run(message, args) {
         const { option } = args;
-        option=option.toLowerCase();
-        // start of animal command option handler. 
-        // animal command help
+
+        // Embed Function Handler to format output of furry image command.
+        function imgEmbed (url) {
+            const imageEmbed = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Animal Handler v2')
+                //.setDescription(desc)
+                .setImage(url)
+                .setThumbnail(client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by CheweyBotAPI.', client.user.avatarURL({format:"png"}))
+            return message.channel.send(imageEmbed); // Sends the image embed to the channel the user ran the command.
+        }
+        // animal command option handler. (MAY REWRITE OPTION CALLS IF API MODULE IS CHANGED!)
         if (option === 'help') {
             const helpEmbed = new MessageEmbed()
                 .setColor('#0099ff')
@@ -38,36 +58,95 @@ module.exports = class FurryCommand extends Command {
                     {name:'Animal Options', value:'\`bird/birb, blep, cheeta, fox, lynx, wolf\`'}
                 )
                 .setThumbnail(this.client.user.avatarURL({format:"png"}))
-                .setFooter('Bot created and maintained by NovaLynxie. Image provided by FurryBotAPI.', this.client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by CheweyBotAPI.', this.client.user.avatarURL({format:"png"}))
             return message.channel.send(helpEmbed);
-        // animal options handler
-        } if (option === 'dog') {
-          logger.debug(`opthandler -> option=cat`)
-          await animage.dog(message, true);
-          return;
+        } if (option === 'bird' || option === 'birb') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("birb").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
         } if (option === 'cat') {
-          logger.debug(`opthandler -> option=${option}`)
-          await animage.cat(message, true)
-          return;
-        } if (option === 'panda') {
-          logger.debug(`opthandler -> option=${option}`)
-          await animage.panda(message, true)
-          return;
-        } if (option === 'koala') {
-          logger.debug(`opthandler -> option=${option}`)
-          await animage.koala(message, true)
-          return;
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("cat").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'dog') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("dog").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'duck') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("duck").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
         } if (option === 'fox') {
-          logger.debug(`opthandler -> option=${option}`)
-          await animage.fox(message, true)
-          return;
-        } if (option === 'random') {
-          logger.debug(`opthandler -> option=${option}`)
-          await animage.random(message, true)
-          return;
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("fox").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'koala') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("koala").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'otter') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("otter").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'owl') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("owl").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'panda') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("panda").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'rabbit') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("rabbit").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'redpanda') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("red-panda").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'snake') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("snake").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'turtle') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("turtle").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
+        } if (option === 'wolf') {
+            logger.debug(`opthandler -> option=${option}`)
+            cheweyBot.get("wolf").then((reply)=>{
+                imgEmbed(reply.data)
+            });
+            return;
         } else {
             message.reply(stripIndents`
-            I could not find that subcommand in this command's database.
+            I'm sorry, but that option does not exist.
             Please check your command input and try again.
             *Use \`p help animal\` for help with this command.*`)
         }

@@ -40,7 +40,7 @@ app.get('/ping', (req, res) => {
   res.send('Response 200 - Online!'); 
 });
 
-// Front Page - The main page to load directly.
+// All Pages for the web interface.
 app.get('/', (req, res) => {
   res.render('home.pug', {
     users: members,
@@ -48,7 +48,9 @@ app.get('/', (req, res) => {
     guilds: guilds
   });
 });
-
+app.get('/about', (req, res) => {
+  res.render('about.pug');
+});
 app.get('/status', (req, res) => {
   res.render('status.pug', {
     //uptime: duration,
@@ -59,7 +61,6 @@ app.get('/status', (req, res) => {
     chVoice: voiceChannels,
   });
 });
-
 // Test Page - Used to test if module is working correctly.
 app.get('/test', (req, res) => {
   res.render('test.pug');

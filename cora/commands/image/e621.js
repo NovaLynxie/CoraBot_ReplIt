@@ -67,7 +67,7 @@ module.exports = class FurryCommand extends Command {
                 )
                 .setThumbnail(client.user.avatarURL({format:"png"}))
                 .setImage(res.image)
-                .setFooter('Bot created and maintained by NovaLynxie. Image provided by FurryBotAPI.', client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by e621.', client.user.avatarURL({format:"png"}))
             return message.channel.send(imageEmbed); // Sends the image embed to the channel the user ran the command.
         }
         // furry command option handler.
