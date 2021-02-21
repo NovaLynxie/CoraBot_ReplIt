@@ -42,8 +42,8 @@ module.exports = class AnimalsCommand extends Command {
                 .setTitle('Animal Handler v2')
                 //.setDescription(desc)
                 .setImage(url)
-                .setThumbnail(client.user.avatarURL({format:"png"}))
-                .setFooter('Bot created and maintained by NovaLynxie. Image provided by CheweyBotAPI.', client.user.avatarURL({format:"png"}))
+                .setThumbnail(this.client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by CheweyBotAPI.', this.client.user.avatarURL({format:"png"}))
             return message.channel.send(imageEmbed); // Sends the image embed to the channel the user ran the command.
         }
         // animal command option handler. (MAY REWRITE OPTION CALLS IF API MODULE IS CHANGED!)
