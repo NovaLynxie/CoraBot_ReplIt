@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-const { MessageEmbed, MessageFlags } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const logger = require('../../providers/WinstonPlugin');
 const { stripIndents } = require('common-tags');
 const {cheweyApiToken} = process.env;
@@ -15,7 +15,7 @@ module.exports = class AnimalsCommand extends Command {
             description: 'Some fun furry images using CheweyBotAPI.',
             details: stripIndents`
                 This command provides a bunch of cute and adorable animal images.
-                From our feathered birds, cute bleps, ~~to the wild animals such as foxes, cheetas, wolves and lynxes~~. 
+                From our feathered birds, cute bleps, to the wild animals such as foxes and wolves. 
                 Service provided by CheweyBotAPI, please **do not** abuse this command.`,
             examples: ['animal <option>'],
             throttling: {
@@ -36,14 +36,12 @@ module.exports = class AnimalsCommand extends Command {
         const { option } = args;
 
         // Embed Function Handler to format output of furry image command.
-        function imgEmbed (url) {
+        function imgEmbed (client, url) {
             const imageEmbed = new MessageEmbed()
                 .setColor('#0099ff')
                 .setTitle('Animal Handler v2')
-                //.setDescription(desc)
                 .setImage(url)
-                .setThumbnail(this.client.user.avatarURL({format:"png"}))
-                .setFooter('Bot created and maintained by NovaLynxie. Image provided by CheweyBotAPI.', this.client.user.avatarURL({format:"png"}))
+                .setFooter('Bot created and maintained by NovaLynxie. Image provided by CheweyBotAPI.', client.user.displayAvatarURL({ format: 'png'}))
             return message.channel.send(imageEmbed); // Sends the image embed to the channel the user ran the command.
         }
         // animal command option handler. (MAY REWRITE OPTION CALLS IF API MODULE IS CHANGED!)
@@ -63,92 +61,92 @@ module.exports = class AnimalsCommand extends Command {
         } if (option === 'bird' || option === 'birb') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("birb").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'cat') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("cat").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'dog') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("dog").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'duck') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("duck").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'fox') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("fox").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'koala') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("koala").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'otter') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("otter").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'owl') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("owl").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'panda') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("panda").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'rabbit') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("rabbit").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'redpanda') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("red-panda").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'snake') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("snake").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'turtle') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("turtle").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } if (option === 'wolf') {
             logger.debug(`opthandler -> option=${option}`)
             cheweyBot.get("wolf").then((reply)=>{
-                imgEmbed(reply.data)
+                imgEmbed(this.client, reply.data)
             });
             return;
         } else {
             message.reply(stripIndents`
             I'm sorry, but that option does not exist.
             Please check your command input and try again.
-            *Use \`p help animal\` for help with this command.*`)
+            *Use \`c help animal\` for help with this command.*`)
         }
     }
 };
