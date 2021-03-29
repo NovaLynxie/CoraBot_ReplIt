@@ -78,14 +78,25 @@ client.registry
     );
 
 
-async function updateDB() {
+async function updateDB(client) {
+  let botUptime = (client.uptime / 1000);
   let totalGuilds = client.guilds.cache.size;
   let totalMembers = client.users.cache.size;
   let allChannels = client.channels.cache.filter(ch=>ch.type!=='category').size;
   let voiceChannels = client.channels.cache.filter(ch=>ch.type==='voice').size;
   let textChannels = client.channels.cache.filter(ch=>ch.type==='text').size;
+  // uptime parser
+  let days = Math.floor(botUptime / 86400);
+  botUptime %= 86400;
+  let hours = Math.floor(botUptime / 3600);
+  botUptime %= 3600;
+  let minutes = Math.floor(botUptime / 60);
+  let seconds = Math.floor(botUptime % 60);
+  let totalUptime = `${days}d ${hours}h ${minutes}m ${seconds}s`;
   // repldb updater
   logger.debug('running task update_database')
+  logger.debug(`assigning uptime as ${totalUptime}`)
+  await db.set("uptime", totalUptime);
   logger.debug(`assigning guilds as ${totalGuilds}`)
   await db.set("guilds", totalGuilds);
   logger.debug(`assigning channels as ${allChannels}`)
@@ -100,15 +111,15 @@ async function updateDB() {
 }
 
 client.once('ready', () => {
-    logger.info(`Logged in as ${client.user.tag}! (${client.user.id})`);
-    updateDB();
-    client.user.setActivity('with Commando');
+  logger.info(`Logged in as ${client.user.tag}! (${client.user.id})`);
+  updateDB(client);
+  client.user.setActivity('with Commando');
 });
 
 client.on('ready', () => {
   setInterval(async () => {
     // repldb updater
-    await updateDB();
+    await updateDB(client);
     // status updater
     const index = Math.floor(Math.random() * (activities.length - 1) + 1);
     if (index >= 0 && index <= 1) {

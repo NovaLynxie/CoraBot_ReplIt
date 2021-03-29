@@ -8,10 +8,11 @@ var guilds, channels, members, allChannels, textChannels, voiceChannels;
 (async () => {
   guilds = await client.get("guilds")
   members = await client.get("members")
+  uptime = await client.get("uptime")
   allChannels = await client.get("allChannels")
   textChannels = await client.get("textChannels")
   voiceChannels = await client.get("voiceChannels")
-  return guilds, channels, members;
+  return guilds, channels, members, uptime;
 })()
 
 logger.info('Starting dashboard server...')
@@ -53,7 +54,7 @@ app.get('/about', (req, res) => {
 });
 app.get('/status', (req, res) => {
   res.render('status.pug', {
-    //uptime: duration,
+    uptime: uptime,
     users: members,
     guilds: guilds,
     channels: allChannels,
