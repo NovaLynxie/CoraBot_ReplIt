@@ -117,9 +117,7 @@ client.once('ready', () => {
 });
 
 client.on('ready', () => {
-  setInterval(async () => {
-    // repldb updater
-    await updateDB(client);
+  setInterval(async () => {    
     // status updater
     const index = Math.floor(Math.random() * (activities.length - 1) + 1);
     if (index >= 0 && index <= 1) {
@@ -134,6 +132,10 @@ client.on('ready', () => {
     client.user.setActivity(activities[index], {type: statusType});
     logger.debug(`Updated status to activity ${index} of ${activities.length-1}`)
   }, 300000);
+  setInterval(async () => {
+    // repldb updater - updates values every minute.
+    await updateDB(client);
+  }, 60000);
 })
 
 process.on('unhandledRejection', error => {
