@@ -82,6 +82,8 @@ module.exports = class MCSrvInfoCommand extends Command {
           Possible Causes:
           > 1. It might be offline, server ip is invalid or the request has timed out.
           > 2. An error occured while processing the data to the embed.
+          > 3. Input IP is invalid or contains special characters like \`colon :\`.
+          To specify a port, do it like this \`mc play.hypixel.net 25565\`.
           If the server ip you entered is valid and server is responding, contact my owner for help.`)
         .setFooter('Powered by Minecraft Server Util.')
       if (err) {
@@ -100,6 +102,7 @@ module.exports = class MCSrvInfoCommand extends Command {
         logger.debug('Successfully wrote data to file!')
       })
     }
+    hostValidator(ip) // if this fails, tell user why then abort command.
     try {
       if (options==='s'||options==='status') {
         mcsutil.status(ip, {port:port ? port : 25565}).then(async (res) => {

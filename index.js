@@ -25,8 +25,9 @@ logger.debug('Loaded autoModerator functions from autoModerator.js')
 const Database = require("@replit/database");
 logger.info('Modules connected and initialized!')
 // ------------------- Bot's Modules ------------------
-// Dashboard interface for the discord bot. (WIP)
-require('./cora/dashboard/dashsrv'); // spin up built-in server
+require('./cora/internal/websrv'); // spin up built-in server
+// Web interface for the discord bot. (WIP)
+//require('./cora/dashboard/dashsrv'); // spin up built-in server
 // May use alternative options if problems arise.
 // Load up the module for the dashboard. (Alternative)
 const Dashboard = require("discord-bot-dashboard"); //Currently unused.
