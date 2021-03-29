@@ -25,13 +25,8 @@ logger.debug('Loaded autoModerator functions from autoModerator.js')
 const Database = require("@replit/database");
 logger.info('Modules connected and initialized!')
 // ------------------- Bot's Modules ------------------
-require('./cora/internal/websrv'); // spin up built-in server
-// Web interface for the discord bot. (WIP)
-//require('./cora/dashboard/dashsrv'); // spin up built-in server
-// May use alternative options if problems arise.
-// Load up the module for the dashboard. (Alternative)
-const Dashboard = require("discord-bot-dashboard"); //Currently unused.
-// Dashboard using development branch version as current npm version is broken at this time. May break unexpectedly!
+require('./cora/dashboard/dashsrv'); // spin up built-in server
+//const Dashboard = require("discord-bot-dashboard"); //Currently unused.
 const path = require('path'); // Loads path library for code file to use file directories.
 
 Structures.extend('Guild', Guild => {
