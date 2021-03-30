@@ -23,17 +23,16 @@ if (enableAutoMod === "yes") {
 }
 // Auto Moderation (BETA)
 module.exports = function autoMod(message) {
-  let channel = message.guild.channels.get(message.channel.id);
-  //let channel = message.guild.channels.cache.get(message.channel.id);
+  //let channel = message.guild.channels.get(message.channel.id);
+  let channel = message.guild.channels.cache.get(message.channel.id);
   let user = message.author;
   logger.debug(`user=${user.name}(#${user.discriminator})`)
   let member = message.guild.member(user.id);
   let roles = message.guild.roles;
-  logger.debug(`channelID=${channel.id} (${typeof channel.id});`)
-  logger.debug(`channels=${channelsList} (${typeof channelsList})`)
-  logger.debug(`channelsListMode=${chListMode} (${typeof chListMode})`)
-  logger.debug(`mediaOptions={removeGifs=${typeof removeGifs}, removeImgs=${typeof removeImgs}, removeVids=${typeof removeVids}, removeURLs=${typeof removeURLs}}`)
-  logger.debug(`mediaOptions={removeGifs=${removeGifs}, removeImgs=${removeImgs}, removeVids=${removeVids}, removeURLs=${removeURLs}}`)
+  logger.verbose(`channelID=${channel.id} (${typeof channel.id});`)
+  logger.verbose(`channels=${channelsList} (${typeof channelsList})`)
+  logger.verbose(`channelsListMode=${chListMode} (${typeof chListMode})`)
+  logger.verbose(`mediaOptions={removeGifs=${typeof removeGifs}, removeImgs=${typeof removeImgs}, removeVids=${typeof removeVids}, removeURLs=${typeof removeURLs}}`)
   let channelSearcher;
   if (!chListMode || chListMode == undefined || chListMode == null) {
     logger.error('Severe Error! channelsListMode was not defined!');

@@ -4,16 +4,7 @@ const logger = require('../providers/WinstonPlugin');
 const Client = require("@replit/database");
 const client = new Client();
 
-var guilds, channels, members, allChannels, textChannels, voiceChannels;
-(async () => {
-  guilds = await client.get("guilds")
-  members = await client.get("members")
-  uptime = await client.get("uptime")
-  allChannels = await client.get("allChannels")
-  textChannels = await client.get("textChannels")
-  voiceChannels = await client.get("voiceChannels")
-  return guilds, channels, members, uptime;
-})()
+var guilds, members, allChannels, textChannels, voiceChannels;
 
 logger.info('Starting dashboard server...')
 
@@ -42,7 +33,10 @@ app.get('/ping', (req, res) => {
 });
 
 // All Pages for the web interface.
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+  members = await client.get("members");
+  guilds = await client.get("guilds");
+  allChannels = await client.get("allChannels");
   res.render('home.pug', {
     users: members,
     channels: allChannels,
@@ -52,7 +46,13 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about.pug');
 });
-app.get('/status', (req, res) => {
+app.get('/status', async (req, res) => {
+  guilds = await client.get("guilds");
+  members = await client.get("members");
+  uptime = await client.get("uptime");
+  allChannels = await client.get("allChannels");
+  textChannels = await client.get("textChannels");
+  voiceChannels = await client.get("voiceChannels");
   res.render('status.pug', {
     uptime: uptime,
     users: members,
