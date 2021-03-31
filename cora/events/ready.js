@@ -8,7 +8,7 @@ module.exports = {
   once: true,
   execute(client) {
     // Announce when client is connected and ready.
-    logger.info(`Logged in as ${client.user.tag}! (${client.user.id})`);
+    logger.info(`Logged in as ${client.user.tag}! (ID:${client.user.id})`);
     updateReplDB(client); // Updates database on startup.
     client.user.setActivity('with Commando');
 
@@ -32,6 +32,6 @@ module.exports = {
     setInterval(async () => {
       // repldb updater - updates values every minute.
       await updateReplDB(client);
-    }, 60000);
+    }, 120000);
   },
 };

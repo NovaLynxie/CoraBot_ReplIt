@@ -2,6 +2,7 @@ const logger = require('../providers/WinstonPlugin');
 const { autoMod } = require('../handlers/bootLoader');
 const { enableAutoMod, chListMode, channelsList, urlsBlacklist, mediaOptions } = autoMod;
 const { removeGifs, removeImgs, removeVids, removeURLs } = mediaOptions;
+
 if (enableAutoMod === "yes") {
   logger.debug('============================================')
   logger.debug('Auto Moderator [ENABLED]')
@@ -26,13 +27,13 @@ module.exports = function autoMod(message) {
   //let channel = message.guild.channels.get(message.channel.id);
   let channel = message.guild.channels.cache.get(message.channel.id);
   let user = message.author;
-  logger.debug(`user=${user.name}(#${user.discriminator})`)
+  logger.verbose(`user=${user.name}(#${user.discriminator})`)
   let member = message.guild.member(user.id);
-  let roles = message.guild.roles;
   logger.verbose(`channelID=${channel.id} (${typeof channel.id});`)
   logger.verbose(`channels=${channelsList} (${typeof channelsList})`)
   logger.verbose(`channelsListMode=${chListMode} (${typeof chListMode})`)
   logger.verbose(`mediaOptions={removeGifs=${typeof removeGifs}, removeImgs=${typeof removeImgs}, removeVids=${typeof removeVids}, removeURLs=${typeof removeURLs}}`)
+  let roles = message.guild.roles;
   let channelSearcher;
   if (!chListMode || chListMode == undefined || chListMode == null) {
     logger.error('Severe Error! channelsListMode was not defined!');
@@ -109,13 +110,13 @@ module.exports = function autoMod(message) {
   }
   function attachedIsImage(msgAttach) { // Check for image file extension.
     let url = msgAttach.url;
-    logger.debug(`msgAttach.url=${url}`);
+    logger.verbose(`msgAttach.url=${url}`);
     // Define image filetype extensions here.
     let fileType = ['jpeg', 'png', 'webp', 'jpg']
     // Compare each file extension with url link.
     let res;
     fileType.every(ext => {
-      logger.debug(typeof ext);
+      logger.verbose(typeof ext);
       logger.debug(`Scanning for extension ${ext} in url.`)
       if (url.indexOf(ext, url.length - ext.length) !== -1) {
         //if (url.indexOf(ext, url.length) - ext.length !== -1) {

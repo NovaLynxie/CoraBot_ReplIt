@@ -1,0 +1,12 @@
+Exception thrown! Log saved to ./logs/crash-reports/crash-31-3-2021_10.16.06.txt. 
+    Caused by: TypeError [ERR_INVALID_CALLBACK]: Callback must be a function. Received 'utf-8'
+    at maybeCallback (fs.js:145:9)
+    at Object.writeFile (fs.js:1354:14)
+    at Object.execute (/home/runner/CoraBelleLynx/cora/events/messageUpdate.js:11:8)
+    at CommandoClient.<anonymous> (/home/runner/CoraBelleLynx/index.js:78:61)
+    at CommandoClient.emit (events.js:326:22)
+    at CommandoClient.EventEmitter.emit (domain.js:483:12)
+    at Object.module.exports [as MESSAGE_UPDATE] (/home/runner/CoraBelleLynx/node_modules/discord.js/src/client/websocket/handlers/MESSAGE_UPDATE.js:14:12)
+    at WebSocketManager.handlePacket (/home/runner/CoraBelleLynx/node_modules/discord.js/src/client/websocket/WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (/home/runner/CoraBelleLynx/node_modules/discord.js/src/client/websocket/WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (/home/runner/CoraBelleLynx/node_modules/discord.js/src/client/websocket/WebSocketShard.js:301:10)
