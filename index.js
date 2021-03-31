@@ -16,14 +16,8 @@ const {config, assets} = require('./cora/handlers/bootLoader.js');
 const {activities} = assets;
 const {prefix, debug, botToken, ownerID} = config
 // Load bot handlers here before bot starts.
-logger.info('Connecting modules to main core...');
 const crashReporter = require('./cora/handlers/crashReporter.js');
 logger.debug('Loaded crashReporter functions from crashReporter.js');
-const autoRespond = require('./cora/modules/autoResponder.js');
-logger.debug('Loaded autoRespond functions from autoResponder.js');
-const autoModerator = require('./cora/modules/autoModerator.js');
-logger.debug('Loaded autoModerator functions from autoModerator.js')
-logger.info('Modules connected and initialized!')
 // ------------------- Bot's Modules ------------------
 require('./cora/dashboard/dashsrv'); // spin up built-in server
 //const Dashboard = require("discord-bot-dashboard"); //Currently unused.
@@ -112,7 +106,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 
 logger.info(`Connecting to Discord...`);
 client.login(botToken).then(
-  logger.info(`Waiting for ready event...`)
+  logger.debug(`Bot is Ready! Waiting for Discord Client...`)
 ).catch(err => {
     logger.error('Bot token is INVALID! Login aborted.')
     logger.error('Please check the bot token in config vars and restart the bot.')

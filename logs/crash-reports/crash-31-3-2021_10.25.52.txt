@@ -1,0 +1,12 @@
+Exception thrown! Log saved to ./logs/crash-reports/crash-31-3-2021_10.25.52.txt. 
+    Caused by: RangeError [EMBED_FIELD_VALUE]: MessageEmbed field values may not be empty.
+    at Function.normalizeField (/home/runner/CoraBelleLynx/node_modules/discord.js/src/structures/MessageEmbed.js:432:23)
+    at /home/runner/CoraBelleLynx/node_modules/discord.js/src/structures/MessageEmbed.js:452:14
+    at Array.map (<anonymous>)
+    at Function.normalizeFields (/home/runner/CoraBelleLynx/node_modules/discord.js/src/structures/MessageEmbed.js:451:8)
+    at MessageEmbed.addFields (/home/runner/CoraBelleLynx/node_modules/discord.js/src/structures/MessageEmbed.js:266:42)
+    at botLogger (/home/runner/CoraBelleLynx/cora/modules/discordLogger.js:81:6)
+    at Object.execute (/home/runner/CoraBelleLynx/cora/events/messageUpdate.js:10:5)
+    at CommandoClient.<anonymous> (/home/runner/CoraBelleLynx/index.js:78:61)
+    at CommandoClient.emit (events.js:326:22)
+    at CommandoClient.EventEmitter.emit (domain.js:483:12)

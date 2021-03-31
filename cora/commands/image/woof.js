@@ -10,7 +10,7 @@ module.exports = class WoofCommand extends Command {
             aliases: ['wuf', 'dog'],
             group: 'image',
             memberName: 'woof',
-            description: 'Sends a random cat image'
+            description: 'Sends a random dog image'
         });
     }
 

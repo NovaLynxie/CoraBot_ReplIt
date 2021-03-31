@@ -15,7 +15,8 @@ module.exports = class BotInfoCommand extends Command {
         const embed = new MessageEmbed()
             .setTitle("About Me")
             .setColor(0xE7A3F0)
-            .setDescription("Hiya! My name is Cora, I am a multi-purpose Discord bot built on Discord.JS with Commando.")
+            .setDescription(stripIndents`
+            Hi there! My name is Cora, I am a multi-purpose Discord bot built on Discord.JS with Commando.`)
             .addFields(
                 {
                     name: "A little bit about myself",
