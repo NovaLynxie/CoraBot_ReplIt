@@ -1,6 +1,6 @@
 {
   "name": "corabot",
-  "version": "2.7.1",
+  "version": "2.7.1-b1",
   "private": true,
   "description": "Discord Bot for CoraLynx",
   "main": "app.js",
