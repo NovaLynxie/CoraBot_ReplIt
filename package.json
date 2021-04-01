@@ -58,11 +58,11 @@
   },
   "nodemonConfig": {
     "ignore": [
+      "cora/assets/*",
+      "cora/cache/*",
       "cora/commands/*",
       "cora/handlers/*",
-      "cora/modules/*",
       "cora/internal/*",
-      "cora/dashboard/*",
       "logs/*"],
     "delay": 2500
   }
