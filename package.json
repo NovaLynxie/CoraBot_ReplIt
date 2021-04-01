@@ -57,7 +57,13 @@
     "nodemon": "^2.0.7"
   },
   "nodemonConfig": {
-    "ignore": ["test/*", "docs/*"],
+    "ignore": [
+      "cora/commands/*",
+      "cora/handlers/*",
+      "cora/modules/*",
+      "cora/internal/*",
+      "cora/dashboard/*",
+      "logs/*"],
     "delay": 2500
   }
 }
