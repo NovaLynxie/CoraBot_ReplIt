@@ -61,6 +61,7 @@
       "cora/assets/*",
       "cora/cache/*",
       "cora/commands/*",
+      "cora/dashboard/views/*",
       "cora/handlers/*",
       "cora/internal/*",
       "logs/*"],
