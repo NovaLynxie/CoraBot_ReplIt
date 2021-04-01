@@ -9,6 +9,19 @@ prefix = "<PREFIX>"
 # Developer only setting! Use this only for debugging the config file.
 debug = false
 
+[tokens]
+# Tokens for modules or logging in.
+# If bot is used for cloud hosting, you will want to use .env files or cloud host systems.
+# Use .env or host's env settings to keep tokens secure unless hosting 24/7 on a local server or machine where config is securely stored.
+useProcessVars = "yes"
+# Any tokens/keys below this line will only work if useProcessVars is set to 'no'.
+# Discord Bot Token. (KEEP THIS SAFE!)
+botToken = "<DISCORD_TOKEN>"
+# API Keys (For Yiffy, YouTube, etc.)
+yiffyApiKey = "<YIFFYAPIKEY>"
+cheweyApiKey = "<CHEWEYAPIKEY>"
+youtubeApiKey = "<YOUTUBEAPIKEY>"
+
 [images]
 # Image modules settings.
 # Client name is used for identifying the bot using some modules.
