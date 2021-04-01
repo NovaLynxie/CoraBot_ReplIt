@@ -33,12 +33,12 @@ module.exports = function botLogger(event, message, client) {
             {
               name: "Author Details",
               value: stripIndents`
-              User Tag: ${author.tag} (ID:${author.id})
-              Nickname: ${author.nickname}`
+              User Tag: ${author.tag}
+              User ID: ${author.id}`
             },
             {
               name: 'Deleted Message',
-              value: message
+              value: (message) ? message : 'Not available.'
             }
           )
           .setColor(0x00ae86)
@@ -65,16 +65,16 @@ module.exports = function botLogger(event, message, client) {
             {
               name: "Author Details",
               value: stripIndents`
-              User Tag: ${author.tag} (ID:${author.id})
-              Nickname: ${author.nickname}`
+              User Tag: ${author.tag}
+              User ID: ${author.id}`
             },
             {
               name: 'Message Before',
-              value: oldMessage
+              value: (oldMessage) ? oldMessage : 'Not available - Cannot fetch old message contents.'
             },
             {
               name: 'Message After',
-              value: newMessage
+              value: (newMessage) ? newMessage : 'Not available'
             }
           )
           .setColor(0x00ae86)
