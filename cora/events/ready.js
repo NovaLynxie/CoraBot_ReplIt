@@ -1,7 +1,7 @@
 const {assets} = require('../handlers/bootLoader');
 const {activities} = assets;
 const logger = require('../providers/WinstonPlugin');
-const updateReplDB = require('../handlers/updateReplDB');
+const updateDB = require('../handlers/dbUpdater.js');
 
 module.exports = {
   name: 'ready',
@@ -9,7 +9,7 @@ module.exports = {
   execute(client) {
     // Announce when client is connected and ready.
     logger.info(`Logged in as ${client.user.tag}! (ID:${client.user.id})`);
-    updateReplDB(client); // Updates database on startup.
+    updateDB(client); // Updates database on startup.
     client.user.setActivity('with Commando');
 
     // Setup interval timers to update status and database.
@@ -31,7 +31,7 @@ module.exports = {
     }, 300000);
     setInterval(async () => {
       // repldb updater - updates values every minute.
-      await updateReplDB(client);
+      await updateDB(client);
     }, 60000);
   },
 };
