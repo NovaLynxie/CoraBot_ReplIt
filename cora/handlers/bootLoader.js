@@ -18,7 +18,7 @@ const { version } = require('../../package.json');
 const { general, tokens, database, images, autoLogger, autoModerator, dashboard } = configData;
 const { prefix, debug } = general;
 const { useProcessVars } = tokens;
-const {  } = database;
+const { storage, settings } = database;
 const { clientName } = images;
 const { enableLogger, logChannels, logEvents } = autoLogger;
 const { messageUpdates, userJoinLeaves, roleUpdates } = logEvents;
@@ -31,6 +31,7 @@ if (useProcessVars === 'yes') {
   botToken = process.env.botToken;
   yiffyApiKey = process.env.yiffyApiKey;
   cheweyApiKey = process.env.cheweyApiKey;
+  youtubeApiKey = process.env.youtubeApiKey;
 } else {
   //ownerID = general.ownerID;
   botToken = tokens.botToken;
@@ -96,4 +97,4 @@ module.exports.autoMod = {enableAutoMod, chListMode, channelsList, mediaOptions}
 module.exports.autoLog = {enableLogger, logChannels, messageUpdates, userJoinLeaves, roleUpdates}; // bot autolog settings
 module.exports.assets = {activities, responses}; // bot asset data
 module.exports.apikeys = {yiffyApiKey, cheweyApiKey, youtubeApiKey}; // api keys
-module.exports.database = {} // database settings
+module.exports.database = {storage, settings} // database settings
