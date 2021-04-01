@@ -1,6 +1,34 @@
 const logger = require('../providers/WinstonPlugin');
-const Database = require("@replit/database");
-const db = new Database();
+const ReplDatabase = require("@replit/database");
+const db = new ReplDatabase();
+const {database} = require('../handlers/bootLoader');
+const {storage, settings} = database;
+
+let db;
+if (storage = "repl") {
+  db = new ReplDatabase();
+}
+
+function repldbUpdate(uptime, guilds, members, allch, txtch, vch) {
+  // repldb updater
+  logger.debug('ran task update_repl_database')
+  logger.verbose(`assigning uptime as ${uptime}`);
+  await db.set("uptime", uptime);
+  logger.verbose(`assigning guilds as ${guilds}`);
+  await db.set("guilds", guilds);
+  logger.verbose(`assigning users as ${members}`);
+  await db.set("members", members);
+  logger.verbose(`assigning channels as ${allch}`);
+  await db.set("allChannels", allch);
+  logger.verbose(`assigning channels as ${txtch}`);
+  await db.set("textChannels", txtch);
+  logger.verbose(`assigning channels as ${vch}`);
+  await db.set("voiceChannels", vch);
+};
+
+function sqlitedbUpdate() {
+
+};
 
 module.exports = async function updateDB(client) {
   let botUptime = (client.uptime / 1000);
@@ -17,8 +45,16 @@ module.exports = async function updateDB(client) {
   let minutes = Math.floor(botUptime / 60);
   //let seconds = Math.floor(botUptime % 60);
   let totalUptime = `${days}d ${hours}h ${minutes}m`;
-  // repldb updater
-  logger.debug('ran task update_database')
+  if (storage === 'repl') {
+    // update using replit if storage method is repl
+    repldbUpdate(totalUptime, totalGuilds, totalMembers, allChannels, textChannels, voiceChannels);
+  } else 
+  if (storage === 'sqlite') {
+    // update using sqlite if storage method is sqlite
+  }
+  
+  repldbUpdate(uptime, guilds, members, allch, txtch, vch)
+  logger.debug('ran task update_repl_database')
   logger.verbose(`assigning uptime as ${totalUptime}`);
   await db.set("uptime", totalUptime);
   logger.verbose(`assigning guilds as ${totalGuilds}`);
