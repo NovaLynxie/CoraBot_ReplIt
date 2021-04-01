@@ -88,8 +88,8 @@ module.exports = class MCSrvInfoCommand extends Command {
         .setFooter('Powered by Minecraft Server Util.')
       if (err) {
         logger.error('An error occured while processing the request!')
-        logger.error(err ? !undefined : 'Unknown error!');
-        logger.debug(err.stack? !undefined : 'No error stacktrace available.');
+        logger.error((err) ? err: 'Unknown error!');
+        logger.debug((err.stack) ? err.stack : 'Unable to get stacktrace of unknown error.');
         logger.warn('Any incoming data may have been discarded.')
       }
       return message.channel.send(errEmbed);
@@ -134,7 +134,7 @@ module.exports = class MCSrvInfoCommand extends Command {
       
     } catch (error) {
       logger.error('Error occured while processing request!');
-      logger.error(error ? !undefined : 'Unknown error.');
+      logger.error((error) ? error : 'Unknown error.');
       logger.warn('All incoming promise responses may have been discarded.');
       message.channel.send('An error occured while processing your request. Please try again.')
     };

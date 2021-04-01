@@ -32,6 +32,6 @@ module.exports = {
     setInterval(async () => {
       // repldb updater - updates values every minute.
       await updateReplDB(client);
-    }, 120000);
+    }, 60000);
   },
 };

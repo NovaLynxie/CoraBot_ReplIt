@@ -16,7 +16,7 @@ app.set('views', __dirname + '/views')
 const port = 3000;
 
 app.listen(port, () => {
-  logger.info(`Server connected to port ${port}`);
+  logger.info(`Web server connected to port ${port}`);
 });
 // App Locals defined here
 (async () => {

@@ -4,12 +4,15 @@ const logger = require('../providers/WinstonPlugin');
 module.exports = {
 	name: 'messageDelete',
 	execute(message, client) {
-    if (message.author.id === client.user.id) {
-      logger.debug("ignored message, message author is bot.")
-      return;
-    };
     logger.verbose("event.messageDelete.trigger()")
     let event = 'messageDelete';
+    if (message.author.id === null) {
+      message.author.id = undefined;
+    }
+    if (message.author.id === client.user.id) {
+        logger.debug("ignored message, message author is bot.")
+        return;
+    };
     botlogs(event, message, client);
 	},
 };

@@ -2,8 +2,9 @@
 require('dotenv').config() // load .env as early as possible
 // ================= LOGGING MODULE ===================
 const logger = require('./cora/providers/WinstonPlugin');
+// fetch package version tag and report in console as app version.
 const {version} = require('./package.json');
-logger.info(`CoraBot v${version}`)
+logger.info(`CoraBot v${version}`) 
 // ================= START BOT CODE ===================
 const { CommandoClient, /*SQLiteProvider*/ } = require('discord.js-commando');
 const { Structures } = require('discord.js');
@@ -41,9 +42,9 @@ Structures.extend('Guild', Guild => {
 });
 
 const client = new CommandoClient({
-    commandPrefix: prefix,
-    owner: ownerID,
-    invite: '',
+  commandPrefix: prefix,
+  owner: ownerID,
+  invite: '',
 });
 const eventFiles = fs.readdirSync('./cora/events').filter(file => file.endsWith('.js'));
 
