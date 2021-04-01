@@ -11,8 +11,7 @@ module.exports = {
       if (oldMessage.content === newMessage.content) return;
     } else {
       oldMessage.author.id = 'N/A'
-    }
-    
+    };    
     botlogs(event, message, client);
 	},
 };
