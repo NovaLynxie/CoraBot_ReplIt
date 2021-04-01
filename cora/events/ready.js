@@ -13,7 +13,7 @@ module.exports = {
     client.user.setActivity('with Commando');
 
     // Setup interval timers to update status and database.
-    setInterval(async () => {    
+    setInterval(async () => {
       // status updater
       logger.debug("ran task update_status")
       const index = Math.floor(Math.random() * (activities.length - 1) + 1);
