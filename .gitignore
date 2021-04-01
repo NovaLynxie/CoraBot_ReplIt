@@ -1,5 +1,4 @@
 config.toml
-package-lock.json
 *.replit
 *.env
 ./temp/
