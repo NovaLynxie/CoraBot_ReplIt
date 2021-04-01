@@ -15,18 +15,36 @@ const configData = toml.parse(fs.readFileSync('./config.toml', function (err){
 //const { discordbot, dashboard } = config; 
 //global dashboard setting depreciated, moved to discordbot.dashboard
 const { version } = require('../../package.json');
-const { general, images, autoLogger, autoModerator, dashboard } = configData;
+const { general, tokens, database, images, autoLogger, autoModerator, dashboard } = configData;
 const { prefix, debug } = general;
+const { useProcessVars } = tokens;
+const {  } = database;
+const { clientName } = images;
 const { enableLogger, logChannels, logEvents } = autoLogger;
 const { messageUpdates, userJoinLeaves, roleUpdates } = logEvents;
 const { enableAutoMod, chListMode, channelsList, mediaOptions } = autoModerator;
-const { clientName, yiffyApiKey } = images;
 const { port } = dashboard; // Depreciated in favour of custom built-in dashboard.
+let botToken, ownerID, yiffyApiKey, cheweyApiKey, youtubeApiKey;
+if (useProcessVars === 'yes') {
+  // Load bot secrets from process.env if this fails use config vars.
+  ownerID = process.env.ownerID;
+  botToken = process.env.botToken;
+  yiffyApiKey = process.env.yiffyApiKey;
+  cheweyApiKey = process.env.cheweyApiKey;
+} else {
+  //ownerID = general.ownerID;
+  botToken = tokens.botToken;
+  yiffyApiKey = tokens.yiffyApiKey;
+  cheweyApiKey = tokens.cheweyApiKey;
+  youtubeApiKey = tokens.youtubeApiKey;
+};
+
 logger.debug(`prefix = ${prefix} (${typeof prefix})`);
 logger.debug(`debug = ${debug} (${typeof debug})`);
 logger.debug(`enabled = null (null)`);
 logger.debug(`port = ${port} (${typeof port})`);
 logger.debug('Loaded config successfully!');
+
 function randomID(min, max) {  
   return Math.floor(
     Math.random() * (max - min + 1) + min
@@ -48,13 +66,12 @@ var eImg = { // Required to use e621 and e926 modules.
 };
 // Yiffy UserAgent for CoraBot. Required otherwise it will fail to work correctly.
 const myUserAgent = `CoraBot/${version} (https://github.com/NovaLynxie/CoraBot_ReplIt)`
-// Load bot secrets from process.env if this fails use config vars.
-var { botToken, ownerID } = process.env;
+
 logger.debug('Loaded process environment variables!');
 // Generate some folders on bot startup.
 let dirpaths = ['./cora/cache/automod/','./cora/cache/mcsrvutil/']
 dirpaths.forEach(async (dirpath) => {
-  await fs.mkdir(dirpath, {recursive: true}, function (err) {
+  fs.mkdir(dirpath, {recursive: true}, function (err) {
     if (err) {
       if (err.code === 'ENOENT') {
         logger.debug(`Missing directory ${dirpath}! Generating now...`)
@@ -65,14 +82,18 @@ dirpaths.forEach(async (dirpath) => {
     };
   })
 })
+
 // Load bot assets from folders as necessary.
 logger.info('Loading bot assets...')
 const { activities } = require('../assets/json/activities.json');
 logger.debug('Loaded activities from activities.json');
 const { responses } = require('../assets/json/responses.json');
 logger.debug('Loaded responses from responses.json');
+
 // Finally export all variables for the bot to access by requiring bootLoader.js
 module.exports.config = {prefix, debug, botToken, ownerID, eImg, myUserAgent, yiffyApiKey, version}; // bot config
 module.exports.autoMod = {enableAutoMod, chListMode, channelsList, mediaOptions}; // bot automod settings
 module.exports.autoLog = {enableLogger, logChannels, messageUpdates, userJoinLeaves, roleUpdates}; // bot autolog settings
 module.exports.assets = {activities, responses}; // bot asset data
+module.exports.apikeys = {yiffyApiKey, cheweyApiKey, youtubeApiKey}; // api keys
+module.exports.database = {} // database settings
