@@ -1,7 +1,9 @@
 config.toml
 *.replit
 *.env
-./temp/
-./logs/*
-./cora/temp/
-./cora/cache/mcsrvutil/
+cora/temp/
+cora/cache/mcsrvutil/
+data/
+logs/
+temp/
+node_modules
