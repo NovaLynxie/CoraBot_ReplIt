@@ -39,7 +39,16 @@ function initSqliteDB() {
 }
 
 function sqlitedbUpdate(uptime, guilds, members, allch, txtch, vch) {
-  let data = runtime.getData.get()
+  let data = {
+    uptime: uptime,
+    guilds: guilds,
+    members: members,
+    allch: allch,
+    txtch: txhch,
+    vch: vch
+  }
+  runtime.setData.run(score);
+  //let data = runtime.getData.get(uptime, guilds, members, allch, txtch, vch)
 }; 
 
 function replitdbUpdate(uptime, guilds, members, allch, txtch, vch) {
