@@ -15,8 +15,9 @@ const configData = toml.parse(fs.readFileSync('./config.toml', function (err){
 //const { discordbot, dashboard } = config; 
 //global dashboard setting depreciated, moved to discordbot.dashboard
 const { version } = require('../../package.json');
-const { general, images, autoLogger, autoModerator, dashboard } = configData;
+const { general, chatty, images, autoLogger, autoModerator, dashboard } = configData;
 const { prefix, debug } = general;
+const { enableChatBot, chatChannels } = chatty;
 const { enableLogger, logChannels, logEvents } = autoLogger;
 const { messageUpdates, userJoinLeaves, roleUpdates } = logEvents;
 const { enableAutoMod, chListMode, channelsList, mediaOptions } = autoModerator;
@@ -73,6 +74,7 @@ const { responses } = require('../assets/json/responses.json');
 logger.debug('Loaded responses from responses.json');
 // Finally export all variables for the bot to access by requiring bootLoader.js
 module.exports.config = {prefix, debug, botToken, ownerID, eImg, myUserAgent, yiffyApiKey, version}; // bot config
+module.exports.chatty = {enableChatBot, chatChannels} // chatbot settings
 module.exports.autoMod = {enableAutoMod, chListMode, channelsList, mediaOptions}; // bot automod settings
 module.exports.autoLog = {enableLogger, logChannels, messageUpdates, userJoinLeaves, roleUpdates}; // bot autolog settings
 module.exports.assets = {activities, responses}; // bot asset data
