@@ -38,9 +38,9 @@ app.get('/', async (req, res) => {
   guilds = await client.get("guilds");
   allChannels = await client.get("allChannels");
   res.render('home.pug', {
-    users: members,
-    channels: allChannels,
-    guilds: guilds
+    users: (members) ? members : '-',
+    channels: (allChannels) ? allChannels : '-',
+    guilds: (guilds) ? guilds : '-'
   });
 });
 app.get('/about', (req, res) => {
@@ -54,12 +54,12 @@ app.get('/status', async (req, res) => {
   textChannels = await client.get("textChannels");
   voiceChannels = await client.get("voiceChannels");
   res.render('status.pug', {
-    uptime: uptime,
-    users: members,
-    guilds: guilds,
-    channels: allChannels,
-    chText: textChannels,
-    chVoice: voiceChannels,
+    uptime: (uptime) ? uptime : 'Not available.',
+    users: (members) ? members : 'Not available',
+    guilds: (guilds) ? guilds : 'Not available',
+    channels: (allChannels) ? allChannels : 'Not available',
+    chText: (textChannels) ? textChannels : 'Not available',
+    chVoice: (voiceChannels) ? voiceChannels : 'Not available',
   });
 });
 // Test Page - Used to test if module is working correctly.
