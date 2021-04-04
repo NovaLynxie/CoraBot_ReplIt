@@ -55,7 +55,7 @@ function sqlitedbUpdate(uptime, guilds, members, allch, txtch, vch) {
   //let data = runtime.getData.get(uptime, guilds, members, allch, txtch, vch)
 }; 
 
-function replitdbUpdate(uptime, guilds, members, allch, txtch, vch) {
+async function replitdbUpdate(uptime, guilds, members, allch, txtch, vch) {
   // repldb updater
   logger.debug('ran task update_repl_database')
   logger.verbose(`assigning uptime as ${uptime}`);
