@@ -9,32 +9,6 @@ prefix = "<PREFIX>"
 # Developer only setting! Use this only for debugging the config file.
 debug = false
 
-[tokens]
-# Tokens for modules or logging in.
-# If bot is used for cloud hosting, you will want to use .env files or cloud host systems.
-# Use .env or host's env settings to keep tokens secure unless hosting 24/7 on a local server or machine where config is securely stored.
-useProcessVars = "yes"
-# Any tokens/keys below this line will only work if useProcessVars is set to 'no'.
-# Discord Bot Token. (KEEP THIS SAFE!)
-botToken = "<DISCORD_TOKEN>"
-# API Keys (For Yiffy, YouTube, etc.)
-yiffyApiKey = "<YIFFYAPIKEY>"
-cheweyApiKey = "<CHEWEYAPIKEY>"
-youtubeApiKey = "<YOUTUBEAPIKEY>"
-
-[database]
-# Database settings.
-# Enable database storage. This is used by some functions.
-# Disabling this will cause some other stuff to break!
-enableDatabase = false
-# Set the instance to either use sqlite or replit database methods.
-# SQLite only works on systems with access to filesystem, Repl only works on replit.com!
-# Valid options: [sqlite, replit, none] 'disable' turns this feature off.
-storage = "none"
-# Currently 'sqlite' does not work right now! Please deploy to a replit repl for full functionality.
-  [database.settings]
-  # Local SQLite database settings.
-
 [images]
 # Image modules settings.
 # Client name is used for identifying the bot using some modules.
@@ -83,3 +57,30 @@ urlWhitelist = [ "" ]
 enableDashboard = false
 # This is the port your bot's dashboard will connect to. Default port is '3000'.
 port = 3000
+
+
+[database]
+# Database settings.
+# Enable database storage. This is used by some functions.
+# Disabling this will cause some other stuff to break!
+enableDatabase = false
+# Set the instance to either use sqlite or replit database methods.
+# SQLite only works on systems with access to filesystem, Repl only works on replit.com!
+# Valid options: [sqlite, replit, none] 'disable' turns this feature off.
+storage = "none"
+# Currently 'sqlite' does not work right now! Please deploy to a replit repl for full functionality.
+  [database.settings]
+  # Local SQLite database settings.
+
+[tokens]
+# Tokens for modules or logging in.
+# If bot is used for cloud hosting, you will want to use .env files or cloud host systems.
+# Use .env or host's env settings to keep tokens secure unless hosting 24/7 on a local server or machine where config is securely stored.
+useProcessVars = "yes"
+# Any tokens/keys below this line will only work if useProcessVars is set to 'no'.
+# Discord Bot Token. (KEEP THIS SAFE!)
+botToken = "<DISCORD_TOKEN>"
+# API Keys (For Yiffy, YouTube, etc.)
+yiffyApiKey = "<YIFFYAPIKEY>"
+cheweyApiKey = "<CHEWEYAPIKEY>"
+youtubeApiKey = "<YOUTUBEAPIKEY>"
