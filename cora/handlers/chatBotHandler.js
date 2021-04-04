@@ -8,7 +8,7 @@ module.exports = function chatty(message) {
         chatChannels.forEach(chatChannel => {
           if (chatChannel === message.channel.id) {
             chatbot.chat(message).then(res => {
-              message.channnel.send(res);
+              message.channel.send(res);
             })
           }
         })
