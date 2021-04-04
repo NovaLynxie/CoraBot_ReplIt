@@ -64,20 +64,5 @@ module.exports = async function updateDB(client) {
     // update using sqlite if storage method is sqlite
     sqlitedbUpdate(totalUptime, totalGuilds, totalMembers, allChannels, textChannels, voiceChannels);
   }
-  
-  replitdbUpdate(uptime, guilds, members, allch, txtch, vch)
-  logger.debug('ran task update_repl_database')
-  logger.verbose(`assigning uptime as ${totalUptime}`);
-  await db.set("uptime", totalUptime);
-  logger.verbose(`assigning guilds as ${totalGuilds}`);
-  await db.set("guilds", totalGuilds);
-  logger.verbose(`assigning channels as ${allChannels}`);
-  await db.set("allChannels", allChannels);
-  logger.verbose(`assigning users as ${totalMembers}`);
-  await db.set("members", totalMembers);
-  logger.verbose(`assigning channels as ${voiceChannels}`);
-  await db.set("voiceChannels", voiceChannels);
-  logger.verbose(`assigning channels as ${textChannels}`);
-  await db.set("textChannels", textChannels);
   //logger.debug('completed successfully!');
 }
