@@ -9,6 +9,12 @@ prefix = "<PREFIX>"
 # Developer only setting! Use this only for debugging the config file.
 debug = false
 
+[chatbot]
+# ChatBot settings. Powered by discord-chatbot.
+enableChatBot = true
+# Channels ChatBot module can talk in. # Channels ChatBot module can talk in. Please use channel IDs for this to work.
+chatChannels = []
+
 [images]
 # Image modules settings.
 # Client name is used for identifying the bot using some modules.
