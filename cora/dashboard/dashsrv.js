@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const logger = require('../providers/WinstonPlugin');
-const Client = require("@replit/database");
-const client = new Client();
+const ReplitDB = require("@replit/database");
+const client = new ReplitDB();
 
 var guilds, members, allChannels, textChannels, voiceChannels;
 
