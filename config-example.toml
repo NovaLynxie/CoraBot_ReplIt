@@ -29,8 +29,8 @@ youtubeApiKey = "<YOUTUBEAPIKEY>"
 enableDatabase = false
 # Set the instance to either use sqlite or replit database methods.
 # SQLite only works on systems with access to filesystem, Repl only works on replit.com!
-# Valid options: [sqlite, replit] 
-storage = "replit"
+# Valid options: [sqlite, replit, none] 'disable' turns this feature off.
+storage = "none"
 # Currently 'sqlite' does not work right now! Please deploy to a replit repl for full functionality.
   [database.settings]
   # Local SQLite database settings.
