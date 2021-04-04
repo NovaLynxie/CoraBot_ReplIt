@@ -20,7 +20,8 @@ const {prefix, debug, botToken, ownerID} = config
 const crashReporter = require('./cora/handlers/crashReporter.js');
 logger.debug('Loaded crashReporter functions from crashReporter.js');
 // ------------------- Bot's Modules ------------------
-require('./cora/dashboard/dashsrv'); // spin up built-in server
+//require('./cora/dashboard/dashsrv'); // disabled in dev build.
+require('./cora/internal/websrv'); // spin up simple web server.
 //const Dashboard = require("discord-bot-dashboard"); //Currently unused.
 const path = require('path'); // Loads path library for code file to use file directories.
 
