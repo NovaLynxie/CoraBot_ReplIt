@@ -14,10 +14,10 @@ const customLevels = {
   levels: {
     //silly: 0, 
     info: 0,
-    data: 1,
-    warn: 2,
-    error: 3,
-    debug: 4,
+    warn: 1,
+    error: 2,
+    debug: 3,
+    data: 4,
     verbose: 5,
   },
   colors: {
