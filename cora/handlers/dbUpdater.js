@@ -10,9 +10,10 @@ if (storage === "replit") {
 } else
 if (storage === "sqlite" ) {
   db = new SQLiteDB('./data/websrv.sqlite');
+  initSqliteDB();
 };
 
-function sqlitedbUpdate(uptime, guilds, members, allch, txtch, vch) {
+function initSqliteDB() {
   const table = db.prepare("SELECT data(*) FROM sqlite_master WHERE type='table' AND name = 'webdata';").get();
   if (!table['data(*)']) {
     // If the table isn't there, create it and setup the database correctly.
@@ -20,8 +21,12 @@ function sqlitedbUpdate(uptime, guilds, members, allch, txtch, vch) {
   }
 
   // And then we have two prepared statements to get and set the score data.
-  client.getScore = db.prepare("SELECT * FROM webdata WHERE uptime = ?")
-  client.setScore = db.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
+  client.getUptime = db.prepare("SELECT * FROM webdata WHERE uptime = ?")
+  client.setUptime = db.prepare("INSERT OR REPLACE INTO webdata (uptime) VALUES (@uptime);");
+}
+
+function sqlitedbUpdate(uptime, guilds, members, allch, txtch, vch) {
+  
 }; 
 
 function replitdbUpdate(uptime, guilds, members, allch, txtch, vch) {
