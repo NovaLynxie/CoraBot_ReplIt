@@ -11,7 +11,8 @@
   "scripts": {
     "test-files": "node ./cora/internal/fileSelfTest.js",
     "test-db": "node ./cora/internal/dbTest.js",
-    "setup": "node ./cora/internal/newConfig.js"
+    "setup": "node ./cora/internal/newConfig.js",
+    "start": "node ."
   },
   "keywords": [
     "Discord.JS",
