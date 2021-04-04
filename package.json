@@ -24,8 +24,9 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.4.0",
-    "@replit/database": "^2.0.0",
+    "@replit/database": "^2.0.1",
     "animage": "^1.0.1",
+    "better-sqlite3": "^7.1.4",
     "cheweybot-api": "^1.0.5",
     "common-tags": "^1.8.0",
     "discord-bot-dashboard": "github:julianYaman/discord-bot-dashboard#the-epic-gamer-branch",
@@ -64,7 +65,8 @@
       "cora/dashboard/views/*",
       "cora/handlers/*",
       "cora/internal/*",
-      "logs/*"],
+      "logs/*"
+    ],
     "delay": 2500
   }
 }
