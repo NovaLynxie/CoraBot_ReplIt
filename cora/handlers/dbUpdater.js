@@ -11,7 +11,10 @@ if (storage === "replit") {
 if (storage === "sqlite" ) {
   db = new SQLiteDB('./data/websrv.sqlite');
   initSqliteDB();
-};
+}
+if (storage === "none") {
+  logger.warn('Database storage disabled! Some functions may not work properly.')
+}
 
 function initSqliteDB() {
   const table = db.prepare("SELECT data(*) FROM sqlite_master WHERE type='table' AND name = 'webdata';").get();
@@ -87,13 +90,15 @@ module.exports = async function updateDB(client) {
   let minutes = Math.floor(botUptime / 60);
   //let seconds = Math.floor(botUptime % 60);
   let totalUptime = `${days}d ${hours}h ${minutes}m`;
-  if (storage === 'repl') {
+  if (storage === 'replit') {
     // update using replit if storage method is repl
     replitdbUpdate(totalUptime, totalGuilds, totalMembers, allChannels, textChannels, voiceChannels);
   } else 
   if (storage === 'sqlite') {
     // update using sqlite if storage method is sqlite
     sqlitedbUpdate(totalUptime, totalGuilds, totalMembers, allChannels, textChannels, voiceChannels);
+  } else {
+    // do nothing.
   }
   //logger.debug('completed successfully!');
 }
