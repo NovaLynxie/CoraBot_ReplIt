@@ -16,13 +16,23 @@ if (storage === "sqlite" ) {
 function initSqliteDB() {
   const table = db.prepare("SELECT data(*) FROM sqlite_master WHERE type='table' AND name = 'webdata';").get();
   if (!table['data(*)']) {
-    // If the table isn't there, create it and setup the database correctly.
+    // Create table if it does not exist.
     db.prepare("CREATE TABLE webdata (id TEXT PRIMARY KEY, uptime INTEGER, guilds INTEGER, members INTEGER, allch INTEGER, txtch INTEGER, vch INTEGER);").run();
   }
-
-  // And then we have two prepared statements to get and set the score data.
+  // Generate prepare statements to get and set relevant data where needed.
   client.getUptime = db.prepare("SELECT * FROM webdata WHERE uptime = ?")
   client.setUptime = db.prepare("INSERT OR REPLACE INTO webdata (uptime) VALUES (@uptime);");
+  client.getMembers = db.prepare("SELECT * FROM webdata WHERE members = ?")
+  client.setMembers = db.prepare("INSERT OR REPLACE INTO webdata (members) VALUES (@members);");
+  client.getGuilds = db.prepare("SELECT * FROM webdata WHERE guilds = ?")
+  client.setGuilds = db.prepare("INSERT OR REPLACE INTO webdata (guilds) VALUES (@guilds);");
+  client.getAllCh = db.prepare("SELECT * FROM webdata WHERE allch = ?")
+  client.setAllCh = db.prepare("INSERT OR REPLACE INTO webdata (allch) VALUES (@allch);");
+  client.getTxtCh = db.prepare("SELECT * FROM webdata WHERE txtch = ?")
+  client.setTxtCh = db.prepare("INSERT OR REPLACE INTO webdata (txtch) VALUES (@txtch);");
+  client.getVCh = db.prepare("SELECT * FROM webdata WHERE vch = ?")
+  client.setVCh = db.prepare("INSERT OR REPLACE INTO webdata (vch) VALUES (@vch);");
+
 }
 
 function sqlitedbUpdate(uptime, guilds, members, allch, txtch, vch) {
