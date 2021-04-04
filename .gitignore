@@ -5,4 +5,5 @@ config.toml
 ./logs/*
 ./cora/temp/
 ./cora/cache/mcsrvutil/
+./data/*
 node_modules
