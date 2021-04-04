@@ -47,8 +47,9 @@ function sqlitedbUpdate(uptime, guilds, members, allch, txtch, vch) {
       guilds: guilds,
       members: members,
       allch: allch,
-      txtch: txhch,
+      txtch: txtch,
       vch: vch
+    }
   }
   runtime.setData.run(score);
   //let data = runtime.getData.get(uptime, guilds, members, allch, txtch, vch)
