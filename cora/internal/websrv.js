@@ -1,4 +1,5 @@
 const express = require('express');
+const logger = require('../providers/WinstonPlugin');
 const app = express();
 
 app.get('/', (req, res) => {
@@ -8,5 +9,5 @@ app.get('/', (req, res) => {
 const port = 3000;
 
 app.listen(port, () => {
-  console.log(`Server connected to port ${port}`);
+  logger.info(`Server connected to port ${port}`);
 });
