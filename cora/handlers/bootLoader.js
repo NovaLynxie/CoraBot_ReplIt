@@ -15,9 +15,9 @@ const configData = toml.parse(fs.readFileSync('./config.toml', function (err){
 //const { discordbot, dashboard } = config; 
 //global dashboard setting depreciated, moved to discordbot.dashboard
 const { version } = require('../../package.json');
-const { general, chatty, images, autoLogger, autoModerator, dashboard } = configData;
+const { general, chatbot, images, autoLogger, autoModerator, dashboard } = configData;
 const { prefix, debug } = general;
-const { enableChatBot, chatChannels } = chatty;
+const { enableChatBot, chatChannels } = chatbot;
 const { enableLogger, logChannels, logEvents } = autoLogger;
 const { messageUpdates, userJoinLeaves, roleUpdates } = logEvents;
 const { enableAutoMod, chListMode, channelsList, mediaOptions } = autoModerator;

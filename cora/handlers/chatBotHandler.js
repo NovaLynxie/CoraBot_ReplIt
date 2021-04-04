@@ -1,6 +1,6 @@
 const {chatty} = require('../handlers/bootLoader.js');
-const {Chatbot} = require('discord-chatbot');
-const chatbot = new Chatbot({name: "Cora", gender: "Female"});
+const ChatBot = require('discord-chatbot');
+const chatbot = new ChatBot({name: "Cora", gender: "Female"});
 const {enableChatBot, chatChannels} = chatty;
 
 module.exports = function chatty(message) {
