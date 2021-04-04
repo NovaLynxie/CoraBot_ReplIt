@@ -22,16 +22,25 @@ yiffyApiKey = "<YIFFYAPIKEY>"
 cheweyApiKey = "<CHEWEYAPIKEY>"
 youtubeApiKey = "<YOUTUBEAPIKEY>"
 
+[database]
+# Database settings.
+# Enable database storage. This is used by some functions.
+# Disabling this will cause some other stuff to break!
+enableDatabase = false
+# Set the instance to either use sqlite or replit database methods.
+# SQLite only works on systems with access to filesystem, Repl only works on replit.com!
+# Valid options: [sqlite, replit] 
+storage = "replit"
+# Currently 'sqlite' does not work right now! Please deploy to a replit repl for full functionality.
+  [database.settings]
+  # Local SQLite database settings.
+
 [images]
 # Image modules settings.
 # Client name is used for identifying the bot using some modules.
 # If left blank, the bot will try to use a temporary client name.
 # This is not recommended as requests from this bot instance may get blocked in future.
 clientName = "<CLIENTNAME>"
-# API Key for usage with the yiffy module in api calls to yiff.rest for furry command. Required for request calls to Yiffy's API.
-# Get your API key from https://yiff.rest/support and run the command '/apikey create' in their discord support server.
-yiffyApiKey = "<YIFFYAPIKEY>"
-# Put key in a .env and type 'hidden' if this will be cloud hosted!
 
 [autoLogger] 
 # Logging module settings.
