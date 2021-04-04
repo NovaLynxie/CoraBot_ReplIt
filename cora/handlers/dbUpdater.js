@@ -20,7 +20,8 @@ function initSqliteDB() {
     db.prepare("CREATE TABLE webdata (id TEXT PRIMARY KEY, uptime INTEGER, guilds INTEGER, members INTEGER, allch INTEGER, txtch INTEGER, vch INTEGER);").run();
   }
   // Generate prepare statements to get and set relevant data where needed.
-  runtime.getData = db.prepare("SELECT * FROM webdata WHERE uptime = ? AND members = ? AND guilds = ? AND allch = ? AND txtch = ? AND vch = ?")
+  //runtime.getData = db.prepare("SELECT * FROM webdata WHERE uptime = ? AND members = ? AND guilds = ? AND allch = ? AND txtch = ? AND vch = ?")
+  runtime.getData = db.prepare("SELECT * FROM webdata")
   runtime.setData = db.prepare("INSERT OR REPLACE INTO webdata (uptime, members, guilds, allch, txtch, vch) VALUES (@uptime, @members, @guilds, @allch, @txtch, @vch)")
   /*
   runtime.getUptime = db.prepare("SELECT * FROM webdata WHERE uptime = ?")
