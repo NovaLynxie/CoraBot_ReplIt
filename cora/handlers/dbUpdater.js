@@ -1,15 +1,22 @@
 const logger = require('../providers/WinstonPlugin');
-const ReplDatabase = require("@replit/database");
-const db = new ReplDatabase();
+const ReplitDB = require("@replit/database");
+const SQLiteDB = require('better-sqlite3');
 const {database} = require('../handlers/bootLoader');
 const {storage, settings} = database;
 
 let db;
-if (storage = "repl") {
-  db = new ReplDatabase();
-}
+if (storage === "replit") {
+  db = new ReplitDB();
+} else
+if (storage === "sqlite" ) {
+  db = new SQLiteDB('./data/websrv.sqlite');
+};
 
-function repldbUpdate(uptime, guilds, members, allch, txtch, vch) {
+function sqlitedbUpdate(uptime, guilds, members, allch, txtch, vch) {
+  
+}; 
+
+function replitdbUpdate(uptime, guilds, members, allch, txtch, vch) {
   // repldb updater
   logger.debug('ran task update_repl_database')
   logger.verbose(`assigning uptime as ${uptime}`);
@@ -24,10 +31,6 @@ function repldbUpdate(uptime, guilds, members, allch, txtch, vch) {
   await db.set("textChannels", txtch);
   logger.verbose(`assigning channels as ${vch}`);
   await db.set("voiceChannels", vch);
-};
-
-function sqlitedbUpdate() {
-
 };
 
 module.exports = async function updateDB(client) {
@@ -47,13 +50,13 @@ module.exports = async function updateDB(client) {
   let totalUptime = `${days}d ${hours}h ${minutes}m`;
   if (storage === 'repl') {
     // update using replit if storage method is repl
-    repldbUpdate(totalUptime, totalGuilds, totalMembers, allChannels, textChannels, voiceChannels);
+    replitdbUpdate(totalUptime, totalGuilds, totalMembers, allChannels, textChannels, voiceChannels);
   } else 
   if (storage === 'sqlite') {
     // update using sqlite if storage method is sqlite
   }
   
-  repldbUpdate(uptime, guilds, members, allch, txtch, vch)
+  replitdbUpdate(uptime, guilds, members, allch, txtch, vch)
   logger.debug('ran task update_repl_database')
   logger.verbose(`assigning uptime as ${totalUptime}`);
   await db.set("uptime", totalUptime);
