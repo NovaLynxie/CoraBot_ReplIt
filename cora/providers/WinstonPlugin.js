@@ -13,16 +13,16 @@ if (!logLevel||logLevel==undefined) {
 // Logging Levels
 const customLevels = {
   levels: {
-    //silly: 0, 
-    info: 0,
-    warn: 1,
-    error: 2,
-    debug: 3,
-    data: 4,
-    verbose: 5,
+    init: 0, 
+    info: 1,
+    warn: 2,
+    error: 3,
+    debug: 4,
+    data: 5,
+    verbose: 6,
   },
   colors: {
-    //silly: 'grey',
+    init: 'grey',
     info: 'green',
     data: 'cyan',
     warn: 'yellow',

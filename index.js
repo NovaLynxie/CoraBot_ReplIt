@@ -4,14 +4,14 @@ require('dotenv').config() // load .env as early as possible
 const logger = require('./cora/providers/WinstonPlugin');
 // fetch package version tag and report in console as app version.
 const {version} = require('./package.json');
-logger.info(`CoraBot v${version}`) 
+logger.init(`CoraBot v${version}`) 
 // ================= START BOT CODE ===================
 const { CommandoClient, /*SQLiteProvider*/ } = require('discord.js-commando');
 const { Structures } = require('discord.js');
 // ------------------- Bot's Modules ------------------
 const fs = require('fs');
 // Requiring bot's own modules here for usage.
-logger.info('Initialising bot systems...')
+logger.init('Initialising bot systems...')
 // Boot.js used to handle bot startup and config loader.
 const {config, assets} = require('./cora/handlers/bootLoader.js');
 const {activities} = assets;
@@ -105,9 +105,9 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
     };
 });
 
-logger.info(`Connecting to Discord...`);
+logger.init(`Connecting to Discord...`);
 client.login(botToken).then(
-  logger.debug(`Bot is Ready! Waiting for Discord Client...`)
+  logger.debug(`Bot is Ready! Waiting for Discord API response...`)
 ).catch(err => {
     logger.error('Bot token is INVALID! Login aborted.')
     logger.error('Please check the bot token in config vars and restart the bot.')
