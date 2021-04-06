@@ -20,16 +20,26 @@ function timeStamp (date) {
   return logstamp = `${logdate}_${logtime}`;
 }
 module.exports = function crashReporter (error) {
+  let stack = error.stack;
+  let messages = ["Did I do that?","Erm... whoops.","Hehe, my bad...", "Well, feck if I how that happened. ¯\\_(ツ)_/¯","CoraBot.exe stopped unexpectedly (X_X)"]
+  let randomMsg = Math.floor(Math.random() * messages.length);
   let date = new Date();
   let logstamp = timeStamp(date);
   let filepath = `./logs/crash-reports/crash-${logstamp}.txt`
-  let crashdata = `Exception thrown! Log saved to ${filepath}. 
-    Caused by: ${error.stack}`
-  
+  let crashdata = `Log Date: ${logstamp}
+  Program crashed unexpectedly! Generating crash-report...
+  ${randomMsg}
+    Caused by: ${error}
+    Stacktrace:
+      ${stack}`
+
   fs.writeFile(filepath, crashdata, function(error) {
-    logger.error(`Something went wrong while writing crash report!`)
-    logger.error(`Caused by: ${error}`)
-    logger.warn(`Error details may have been lost, check console.`)
+    if (error) {
+      let stack = error.stack;
+      logger.error(`Something went wrong while writing crash report!`)
+      logger.error(`Caused by: ${error}`)
+      logger.warn(`Error details may have been lost, check console.`)
+    }
+    logger.warn(`Log saved to ${filepath}`)
   })
-  logger.error(`Exception thrown! Log saved to ${filepath}.`)
 }
