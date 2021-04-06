@@ -46,20 +46,24 @@ module.exports = function modLogger(action, message, user, reason, client) {
       };
     });
   }
-  let title, operator = message.author.tag;
-  logger.info('Logging moderation action...')
-	switch (action) { 
-    case 'ban':
-      // log user ban here.
-      title = 'The ban hammer has spoken'
-      action = 'Ban'
-      generateModLog(title, operator, user, action, reason);
-      break;
-    case 'kick':
-      // log user kick here.
-      title = 'They have been kicked out.'
-      action = 'Kick'
-      generateModLog(title, operator, user, action, reason);
-      break;
+  if (enableLogger === true) {
+    let title, operator = message.author.tag;
+    logger.info('Logging moderation action...')
+    switch (action) { 
+      case 'ban':
+        // log user ban here.
+        title = 'The ban hammer has spoken'
+        action = 'Ban'
+        generateModLog(title, operator, user, action, reason);
+        break;
+      case 'kick':
+        // log user kick here.
+        title = 'They have been kicked out.'
+        action = 'Kick'
+        generateModLog(title, operator, user, action, reason);
+        break;
+    };
+  } else {
+    // do nothing.
   };
 };
