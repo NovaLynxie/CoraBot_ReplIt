@@ -2,7 +2,7 @@ const fs = require('fs');
 const logger = require('../providers/WinstonPlugin');
 // Sets time and date of the crash report file as logstamp.
 function timeStamp (date) { 
-  var hrs, mins, secs, logtime, day, month, year, logdate, logstamp;
+  var hrs, mins, secs, logtime, day, month, year, logdate;
   // Get current time as hours.mins.secs and put into logtime
   hrs = date.getUTCHours();
   if (hrs <= 9) hrs = `0${hrs}`
