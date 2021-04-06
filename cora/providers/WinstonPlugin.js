@@ -52,8 +52,7 @@ const logger = createLogger({
       ),
       handleExceptions: true
     }),
-    new transports.DailyRotateFile({
-      
+    new transports.DailyRotateFile({      
       filename: 'corabot-%DATE%.log',
       datePattern: 'DD-MM-YY',
       zippedArchive: true,
