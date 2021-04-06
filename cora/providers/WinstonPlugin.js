@@ -1,6 +1,7 @@
 require('dotenv').config() // load .env as early as possible
 const winston = require('winston');
 require('winston-daily-rotate-file'); //re-added for daily logs.
+const {name} = require('../../package.json');
 const {addColors, createLogger, format, transports} = winston
 const {combine, colorize, errors, json, timestamp, printf} = format;
 var {logLevel} = process.env; // gets logLevel from os process.env vars
@@ -53,7 +54,7 @@ const logger = createLogger({
       handleExceptions: true
     }),
     new transports.DailyRotateFile({      
-      filename: 'corabot-%DATE%.log',
+      filename: `./logs/${name}-%DATE%.log`,
       datePattern: 'DD-MM-YY',
       zippedArchive: true,
       maxSize: '50m',
@@ -61,7 +62,7 @@ const logger = createLogger({
       level: 'debug'
     }),
     new transports.DailyRotateFile({
-      filename: 'debug-%DATE%.log',
+      filename: `./logs/debug-%DATE%.log`,
       datePattern: 'DD-MM-YY',
       zippedArchive: true,
       maxSize: '50m',
