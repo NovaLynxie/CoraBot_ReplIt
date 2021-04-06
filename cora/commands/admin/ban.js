@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
+const modlogs = require('../../modules/modLogger');
 const getLocalTime = require('../../handlers/serverRegion');
 module.exports = class BanCommand extends Command {
     constructor(client) {
@@ -29,6 +30,7 @@ module.exports = class BanCommand extends Command {
                     key: 'reason',
                     prompt: 'Any reasons for their ban?',
                     type: 'string',
+                    default: 'No reason provided.'
                 }
             ]
         })
@@ -59,6 +61,9 @@ module.exports = class BanCommand extends Command {
                 console.log(`[Warn] Unable to kick user, possibly permission error or my permission level is too low.`)
                 return
             }
+            let action = 'ban';
+            //modlogs(action, message, user, reason, this.client); 
+            //modLogger not ready yet. disabled this till it is working.
             var logColor = 0xDC9934
             var operator = message.author.username+'#'+message.author.discriminator
             var nick = message.guild.members.fetch(user.id)

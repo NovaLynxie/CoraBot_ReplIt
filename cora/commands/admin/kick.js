@@ -29,11 +29,12 @@ module.exports = class BanCommand extends Command {
                     key: 'reason',
                     prompt: 'Any reasons for them to be kicked out?',
                     type: 'string',
+                    default: 'No reason provided.'
                 }
             ]
         })
     }
-    run(message, { user, reason="No reason given"}) {
+    run(message, { user, reason}) {
         var channel = message.guild.channels.cache.find(ch => ch.name === 'moderation-log')
         try {
             if (!channel) {
