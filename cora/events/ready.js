@@ -16,7 +16,7 @@ module.exports = {
     // Setup interval timers to update status and database.
     setInterval(async () => {    
       // status updater
-      logger.debug("ran task update_status")
+      logger.verbose("ran task update_status")
       const index = Math.floor(Math.random() * (activities.length - 1) + 1);
       if (index >= 0 && index <= 1) {
         var statusType = 1 // 1 - Playing

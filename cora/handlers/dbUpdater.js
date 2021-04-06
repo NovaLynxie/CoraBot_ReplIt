@@ -18,7 +18,7 @@ module.exports = async function updateDB(client) {
   //let seconds = Math.floor(botUptime % 60);
   let totalUptime = `${days}d ${hours}h ${minutes}m`;
   // repldb updater
-  logger.debug('ran task update_database')
+  logger.verbose('ran task update_database')
   logger.verbose(`assigning uptime as ${totalUptime}`);
   await db.set("uptime", totalUptime);
   logger.verbose(`assigning guilds as ${totalGuilds}`);
