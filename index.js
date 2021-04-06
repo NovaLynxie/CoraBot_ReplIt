@@ -13,8 +13,7 @@ const fs = require('fs');
 // Requiring bot's own modules here for usage.
 logger.init('Initialising bot systems...')
 // Boot.js used to handle bot startup and config loader.
-const {config, assets} = require('./cora/handlers/bootLoader.js');
-const {activities} = assets;
+const {config} = require('./cora/handlers/bootLoader.js');
 const {prefix, debug, botToken, ownerID} = config
 // Load bot handlers here before bot starts.
 const crashReporter = require('./cora/handlers/crashReporter.js');
