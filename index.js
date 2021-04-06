@@ -107,7 +107,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 
 logger.init(`Connecting to Discord...`);
 client.login(botToken).then(
-  logger.debug(`Bot is Ready! Waiting for Discord API response...`)
+  logger.debug(`Awaiting for Discord API response...`)
 ).catch(err => {
     logger.error('Bot token is INVALID! Login aborted.')
     logger.error('Please check the bot token in config vars and restart the bot.')
