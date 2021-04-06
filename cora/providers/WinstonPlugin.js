@@ -59,7 +59,7 @@ const logger = createLogger({
       maxSize: '50m',
       maxFiles: '14d',
       level: 'debug'
-    })
+    }),
     new transports.DailyRotateFile({
       filename: 'debug-%DATE%.log',
       datePattern: 'DD-MM-YY',

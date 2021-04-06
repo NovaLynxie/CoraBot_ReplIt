@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": ".08779dc912fe535f99d4c88f8eeb583278160916-audit.json",
+    "files": [
+        {
+            "date": 1617698955908,
+            "name": "corabot-06-04-21.log",
+            "hash": "58259c28c84c1890a95eb3638a46e1db"
+        }
+    ]
+}
