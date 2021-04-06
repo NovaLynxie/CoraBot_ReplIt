@@ -22,7 +22,7 @@ const customLevels = {
     verbose: 6,
   },
   colors: {
-    init: 'grey',
+    init: 'dim white',
     info: 'green',
     data: 'cyan',
     warn: 'yellow',
