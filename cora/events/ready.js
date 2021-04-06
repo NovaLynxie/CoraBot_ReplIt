@@ -8,7 +8,8 @@ module.exports = {
   once: true,
   execute(client) {
     // Announce when client is connected and ready.
-    logger.info(`Logged in as ${client.user.tag}! (ID:${client.user.id})`);
+    logger.info(`Logged in as ${client.user.tag}!`);
+    logger.data(`Bot User ID: ${client.user.id}`);
     updateDB(client); // Updates database on startup.
     client.user.setActivity('with Commando');
 

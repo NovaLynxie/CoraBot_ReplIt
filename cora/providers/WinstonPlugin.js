@@ -17,8 +17,8 @@ const customLevels = {
     info: 1,
     warn: 2,
     error: 3,
-    debug: 4,
-    data: 5,
+    data: 4,
+    debug: 5,
     verbose: 6,
   },
   colors: {
