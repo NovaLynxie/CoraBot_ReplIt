@@ -6,7 +6,7 @@ const client = new Client();
 
 var guilds, members, allChannels, textChannels, voiceChannels;
 
-logger.info('Starting dashboard server...')
+logger.init('Starting dashboard server...')
 
 // Setup webserver configuration.
 app.set('view engine', 'pug')

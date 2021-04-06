@@ -7,8 +7,9 @@ const fs = require('fs');
 // Config loader (TOML Localised File Handler)
 const toml = require('toml'); // Enables parsing of *.toml files
 const configData = toml.parse(fs.readFileSync('./config.toml', function (err){
-  logger.debug(`Error while reading file...`)
-  logger.debug(err)
+  logger.error(`Error while reading file...`)
+  logger.error(err)
+  logger.debug(err.stack)
   logger.warn(`Is file missing or unreadable?`)
 }));
 // Load config data from config.toml file.
@@ -67,7 +68,7 @@ dirpaths.forEach(async (dirpath) => {
   })
 })
 // Load bot assets from folders as necessary.
-logger.info('Loading bot assets...')
+logger.init('Loading bot assets...')
 const { activities } = require('../assets/json/activities.json');
 logger.debug('Loaded activities from activities.json');
 const { responses } = require('../assets/json/responses.json');
