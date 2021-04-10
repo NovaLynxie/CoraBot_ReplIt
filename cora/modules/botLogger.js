@@ -14,7 +14,11 @@ const {
 module.exports = function botLogger(event, message, client) {
   logger.data(`channelID:${message.channel.id}`);
   if (ignoreChannels.includes(message.channel.id)) {
-    logger.debug('Channel is blacklisted from logs, ignoring.');
+    logger.debug('Channel is blacklisted from logs! Silently ignored to prevent log spam.');
+    return;
+  };
+  if (ignoreChannels.includes(message.channel.id)) {
+    logger.debug('Channel is a bot logging channel! Silently ignored to prevent looping.');
     return;
   };
   function sendLog(guild, embed) {
