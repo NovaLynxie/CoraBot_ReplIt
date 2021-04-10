@@ -12,12 +12,21 @@ const {
 } = autoLog;
 
 module.exports = function botLogger(event, message, client) {
-  logger.data(`channelID:${message.channel.id}`);
-  if (ignoreChannels.includes(message.oldMessage.channel.id)) {
+  if (message.oldMessage || message.newMessage) {
+    try {
+    logger.data(`channelID:${message.oldMessage.channel.id}`);
+    logger.data(`channelID:${message.newMessage.channel.id}`);
+    } catch (err) {
+      logger.warn(`Missing arg oldMessage/newMessage! Data is either malformed or missing.`)
+      logger.error(err)
+      logger.debug(err.stack)
+    }
+  }
+  if (ignoredChannels.indexOf(message.newMessage.channel.id) !== -1) {
     logger.debug('Channel is blacklisted from logs! Silently ignored to prevent log spam.');
     return;
   };
-  if (ignoreChannels.includes(message.oldMessage.channel.id)) {
+  if (logChannels.indexOf(message.newMessage.channel.id) !== -1) {
     logger.debug('Channel is a bot logging channel! Silently ignored to prevent looping.');
     return;
   };
