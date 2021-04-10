@@ -11,10 +11,12 @@ const coreFilepaths = [
 ]
 
 const dataFilepaths = [
-  "./cora/assets/cache/",
   "./cora/assets/img/",
   "./cora/assets/json/",
-  "./logs/",
+  "./cora/cache/automod",
+  "./cora/cache/mcsrvutil",
+  "./logs/"
+  "./logs/automod-reports/",
   "./logs/crash-reports/"
 ]
 

@@ -24,20 +24,20 @@ require('./cora/dashboard/dashsrv'); // spin up built-in server
 const path = require('path'); // Loads path library for code file to use file directories.
 
 Structures.extend('Guild', Guild => {
-    class MusicGuild extends Guild {
-        constructor(bot, data){
-            super(bot, data);
-            this.musicData = {
-                queue: [],
-                isPlaying: false,
-                nowPlaying: null,
-                songDispatcher: null,
-                radioDispatcher: null,
-                volume: 1
-            };
-        }
-    }
-    return MusicGuild;
+  class MusicGuild extends Guild {
+    constructor(bot, data){
+      super(bot, data);
+        this.musicData = {
+          queue: [],
+            isPlaying: false,
+            nowPlaying: null,
+            songDispatcher: null,
+            radioDispatcher: null,
+            volume: 1
+        };
+      }
+  }
+  return MusicGuild;
 });
 
 const client = new CommandoClient({
