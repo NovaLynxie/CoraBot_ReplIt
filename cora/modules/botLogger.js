@@ -12,6 +12,11 @@ const {
 } = autoLog;
 
 module.exports = function botLogger(event, message, client) {
+  logger.data(`channelID:${message.channel.id}`);
+  if (ignoreChannels.includes(message.channel.id)) {
+    logger.debug('Channel is blacklisted from logs, ignoring.');
+    return;
+  };
   function sendLog(guild, embed) {
     logChannels.forEach(channel => {
       let logChannel = guild.channels.cache.get(channel);
