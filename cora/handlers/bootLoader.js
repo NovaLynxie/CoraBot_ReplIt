@@ -28,6 +28,7 @@ logger.debug(`prefix = ${prefix} (${typeof prefix})`);
 logger.debug(`debug = ${debug} (${typeof debug})`);
 logger.debug(`enabled = null (null)`);
 logger.debug(`port = ${port} (${typeof port})`);
+logger.debug(`logChannels = ${logChannels}, ignoredChannels = ${ignoredChannels}`);
 logger.debug('Loaded config successfully!');
 function randomID(min, max) {  
   return Math.floor(
@@ -72,6 +73,7 @@ logger.init('Loading bot assets...')
 const { activities } = require('../assets/json/activities.json');
 logger.debug('Loaded activities from activities.json');
 const { responses } = require('../assets/json/responses.json');
+const { log } = require('util');
 logger.debug('Loaded responses from responses.json');
 // Finally export all variables for the bot to access by requiring bootLoader.js
 module.exports.config = {prefix, debug, botToken, ownerID, eImg, myUserAgent, yiffyApiKey, version}; // bot config
