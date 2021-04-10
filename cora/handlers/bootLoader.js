@@ -19,7 +19,7 @@ const { version } = require('../../package.json');
 const { general, chatbot, images, autoLogger, autoModerator, dashboard } = configData;
 const { prefix, debug } = general;
 const { enableChatBot, chatChannels } = chatbot;
-const { enableLogger, logChannels, logEvents } = autoLogger;
+const { enableLogger, logChannels, ignoredChannels, logEvents } = autoLogger;
 const { messageUpdates, userJoinLeaves, roleUpdates } = logEvents;
 const { enableAutoMod, chListMode, channelsList, mediaOptions } = autoModerator;
 const { clientName, yiffyApiKey } = images;
@@ -77,5 +77,5 @@ logger.debug('Loaded responses from responses.json');
 module.exports.config = {prefix, debug, botToken, ownerID, eImg, myUserAgent, yiffyApiKey, version}; // bot config
 module.exports.chatty = {enableChatBot, chatChannels} // chatbot settings
 module.exports.autoMod = {enableAutoMod, chListMode, channelsList, mediaOptions}; // bot automod settings
-module.exports.autoLog = {enableLogger, logChannels, messageUpdates, userJoinLeaves, roleUpdates}; // bot autolog settings
+module.exports.autoLog = {enableLogger, logChannels, ignoredChannels, messageUpdates, userJoinLeaves, roleUpdates}; // bot autolog settings
 module.exports.assets = {activities, responses}; // bot asset data

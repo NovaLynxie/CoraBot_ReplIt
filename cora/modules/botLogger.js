@@ -5,6 +5,7 @@ const { autoLog } = require('../handlers/bootLoader');
 const {
   enableLogger,
   logChannels,
+  ignoredChannels,
   messageUpdates,
   userJoinLeaves,
   roleUpdates

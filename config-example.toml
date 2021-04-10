@@ -33,7 +33,7 @@ enableLogger = "yes"
 # If not defined, will try to fallback to #logs channel if available.
 logChannels = []
 # Ignore specific channels. Prevents log spam caused by many updates from said channels.
-ignoreChannels = []
+ignoredChannels = []
   [autoLogger.logEvents]
   # Log message edits, join/leave events and more. 
   # Channel must be set otherwise these will be ignored!
