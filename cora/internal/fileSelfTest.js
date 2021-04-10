@@ -15,7 +15,7 @@ const dataFilepaths = [
   "./cora/assets/json/",
   "./cora/cache/automod",
   "./cora/cache/mcsrvutil",
-  "./logs/"
+  "./logs/",
   "./logs/automod-reports/",
   "./logs/crash-reports/"
 ]
