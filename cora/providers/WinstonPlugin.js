@@ -54,20 +54,28 @@ const logger = createLogger({
       handleExceptions: true
     }),
     new transports.DailyRotateFile({      
+      level: 'error',
+      format: combine(
+        errors({stack: true}),
+        timestamp({format: 'HH:mm:ss'}),
+      ),  
       filename: `./logs/${name}-%DATE%.log`,
       datePattern: 'DD-MM-YY',
       zippedArchive: true,
       maxSize: '50m',
-      maxFiles: '14d',
-      level: 'error'
+      maxFiles: '14d'
     }),
     new transports.DailyRotateFile({
+      level: 'debug',
+      format: combine(
+        errors({stack: true}),
+        timestamp({format: 'HH:mm:ss'}),
+      ),
       filename: `./logs/debug-%DATE%.log`,
       datePattern: 'DD-MM-YY',
       zippedArchive: true,
       maxSize: '50m',
-      maxFiles: '14d',
-      level: 'debug'
+      maxFiles: '14d'
     })
   ],
 });

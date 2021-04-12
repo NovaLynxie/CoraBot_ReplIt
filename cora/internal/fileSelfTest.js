@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-console.log('Running File SelfTest v1.0')
+console.log('Running File SelfTest v1.2')
 
 const coreFilepaths = [
   "./cora/handlers/bootLoader.js",
