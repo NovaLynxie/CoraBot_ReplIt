@@ -63,7 +63,7 @@ const logger = createLogger({
       datePattern: 'DD-MM-YY',
       zippedArchive: true,
       maxSize: '50m',
-      maxFiles: '14d'
+      maxFiles: '7d'
     }),
     new transports.DailyRotateFile({
       level: 'debug',
@@ -75,7 +75,7 @@ const logger = createLogger({
       datePattern: 'DD-MM-YY',
       zippedArchive: true,
       maxSize: '50m',
-      maxFiles: '14d'
+      maxFiles: '7d'
     })
   ],
 });
