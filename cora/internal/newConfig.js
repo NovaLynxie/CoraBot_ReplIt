@@ -15,7 +15,8 @@ debug = false
 [chatbot]
 # ChatBot settings. Powered by discord-chatbot.
 enableChatBot = true
-# Channels ChatBot module can talk in. # Channels ChatBot module can talk in. Please use channel IDs for this to work.
+# Channels ChatBot module can talk in. # Channels ChatBot module can talk in. 
+# This will only accept channel IDs NOT channel names.
 chatChannels = []
 
 [images]
@@ -66,6 +67,7 @@ urlWhitelist = [ "" ]
   removeURLs = "yes"
   # Note: removeVids and removeImgs are very experimental.
   # Please use them with caution as they are currently WIP.
+
 `; // Config Template (DO NOT EDIT!)
 fs.writeFile('./config.toml', cfgTemplate, { flag: 'wx' }, function (err) {
     if (err) {
