@@ -4,7 +4,7 @@ require('dotenv').config() // load .env as early as possible
 const logger = require('./cora/providers/WinstonPlugin');
 // fetch package version tag and report in console as app version.
 const {version} = require('./package.json');
-logger.init(`CoraBot v${version}`) 
+logger.init(`CoraBot v${version}`);
 // ================= START BOT CODE ===================
 const { CommandoClient, /*SQLiteProvider*/ } = require('discord.js-commando');
 const { Structures } = require('discord.js');
@@ -14,7 +14,7 @@ const fs = require('fs');
 logger.init('Initialising bot systems...')
 // Boot.js used to handle bot startup and config loader.
 const {config} = require('./cora/handlers/bootLoader.js');
-const {prefix, debug, botToken, ownerID} = config
+const {prefix, debug, botToken, ownerID} = config;
 // Load bot handlers here before bot starts.
 const crashReporter = require('./cora/handlers/crashReporter.js');
 logger.debug('Loaded crashReporter functions from crashReporter.js');
