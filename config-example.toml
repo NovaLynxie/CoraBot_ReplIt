@@ -55,7 +55,6 @@ channelsList = []
 urlBlacklist = [ "tenor.com/view/", "media.giphy.com/media/" ]
 # URL domains or links to ignore when removing messages.
 urlWhitelist = [ "" ]
-
   [autoModerator.mediaOptions]
   # These tell which types of media the auto moderator should look for.
   removeGifs = "yes"
