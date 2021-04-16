@@ -13,7 +13,8 @@
     "test-db": "node ./cora/internal/dbTest.js",
     "clear-logs": "node ./cora/internal/logCleaner.js",
     "setup": "node ./cora/internal/newConfig.js",
-    "start": "node ."
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "keywords": [
     "Discord.JS",
@@ -54,5 +55,15 @@
     "yiff": "^2.0.2",
     "yiffy": "^2.0.8",
     "ytdl-core": "^4.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "cora/*",
+      "logs/*"
+    ],
+    "delay": "2500"
   }
 }
