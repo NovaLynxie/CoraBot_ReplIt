@@ -35,7 +35,7 @@ module.exports = function autoMod(message) {
   logger.verbose(`mediaOptions={removeGifs=${typeof removeGifs}, removeImgs=${typeof removeImgs}, removeVids=${typeof removeVids}, removeURLs=${typeof removeURLs}}`)
   let roles = message.guild.roles;
   let channelSearcher;
-  if (!chListMode || chListMode == undefined || chListMode == null) {
+  if (!chListMode || chListMode === undefined || chListMode === null) {
     logger.error('Severe Error! channelsListMode was not defined!');
     logger.warn('AutoModerator will fail if this is not set correctly!');
     return;

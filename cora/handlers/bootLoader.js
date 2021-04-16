@@ -21,7 +21,7 @@ const { prefix, debug } = general;
 const { enableChatBot, chatChannels } = chatbot;
 const { enableLogger, logChannels, ignoredChannels, logEvents } = autoLogger;
 const { messageUpdates, userJoinLeaves, roleUpdates } = logEvents;
-const { enableAutoMod, chListMode, channelsList, mediaOptions } = autoModerator;
+const { enableAutoMod, chListMode, channelsList, urlsBlacklist, urlsWhitelist, mediaOptions } = autoModerator;
 const { clientName, yiffyApiKey } = images;
 const { port } = dashboard; // Depreciated in favour of custom built-in dashboard.
 logger.debug(`prefix = ${prefix} (${typeof prefix})`);
@@ -78,6 +78,6 @@ logger.debug('Loaded responses from responses.json');
 // Finally export all variables for the bot to access by requiring bootLoader.js
 module.exports.config = {prefix, debug, botToken, ownerID, eImg, myUserAgent, yiffyApiKey, version}; // bot config
 module.exports.chatty = {enableChatBot, chatChannels} // chatbot settings
-module.exports.autoMod = {enableAutoMod, chListMode, channelsList, mediaOptions}; // bot automod settings
+module.exports.autoMod = {enableAutoMod, chListMode, channelsList, urlsBlacklist, urlsWhitelist, mediaOptions}; // bot automod settings
 module.exports.autoLog = {enableLogger, logChannels, ignoredChannels, messageUpdates, userJoinLeaves, roleUpdates}; // bot autolog settings
 module.exports.assets = {activities, responses}; // bot asset data

@@ -51,9 +51,9 @@ chListMode = "whitelist"
 # This only accepts channel IDs, NOT channel names. Using channel name will cause the moderator to fail.
 # To get the channel's ID, enable 'Developer Mode' in User Settings -> Appearance -> Advanced.
 channelsList = []
-# URL domains to check when removing messages.
+# URL domains or links to check when removing messages.
 urlBlacklist = [ "tenor.com/view/", "media.giphy.com/media/" ]
-# URL domains to ignore when removing messages.
+# URL domains or links to ignore when removing messages.
 urlWhitelist = [ "" ]
 
   [autoModerator.mediaOptions]

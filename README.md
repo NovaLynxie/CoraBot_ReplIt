@@ -10,3 +10,4 @@ A modified version of CoraBot's code for use with Replit. ~~This version does no
  My main purpose is to help you bring some life to your discord guild or community server, wherever I can.
  I can play some music for you, give you information about me or help you moderate your own guild using my own custom built admin commands!
  Don't worry, I also come with a help command so you can find out what commands I have, just ask whenever you're having trouble remembering one of my commands.
+
