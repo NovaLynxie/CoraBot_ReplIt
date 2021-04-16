@@ -1,6 +1,6 @@
 const logger = require('../providers/WinstonPlugin');
 const { autoMod } = require('../handlers/bootLoader');
-const { enableAutoMod, chListMode, channelsList, urlsBlacklist, mediaOptions } = autoMod;
+const { enableAutoMod, chListMode, channelsList, urlBlacklist, urlWhitelist, mediaOptions } = autoMod;
 const { removeGifs, removeImgs, removeVids, removeURLs } = mediaOptions;
 
 if (enableAutoMod === "yes") {
@@ -84,12 +84,12 @@ module.exports = function autoMod(message) {
     }
     logger.debug(`urlChecker resolved as ${removeURLs === "yes" && message.content.startsWith(`https://`)}`)
     if (removeURLs === "yes" && message.content.startsWith(`https://`)) {
-      logger.debug(typeof urlsBlacklist);
+      logger.debug(`urlBlacklist ${urlBlacklist} (${typeof urlBlacklist})`);
       logger.debug("Detected https_url, searching content")
-      urlsBlacklist.every(url => {
+      urlBlacklist.forEach(url => {
         logger.debug(`Scanning for blacklisted ${url} in message content.`)
         logger.debug(`message.content -> ${message.content}`)
-        logger.debug(`urlsBlacklistCheck -> result=${message.content.indexOf(url)}`)
+        logger.debug(`urlBlacklistCheck -> result=${message.content.indexOf(url)}`)
         if (message.content.indexOf(url) != -1) {
           logger.debug(`Detected url link in message! Removing now.`);
           logger.info(`Caught ${user.name} posting blacklisted links in ${channel.name}! Removing offending message.`);
