@@ -1,6 +1,6 @@
 {
   "name": "corabot",
-  "version": "2.7.8",
+  "version": "2.7.9",
   "private": true,
   "description": "Discord Bot for CoraLynx",
   "main": "app.js",
@@ -48,6 +48,7 @@
     "random-animals-api": "^1.2.0",
     "simple-youtube-api": "^5.2.1",
     "sqlite": "^4.0.2",
+    "sqlite3": "^5.0.2",
     "toml": "^3.0.0",
     "wait": "^0.4.2",
     "winston": "^3.2.1",
