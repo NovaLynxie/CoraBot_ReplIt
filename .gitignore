@@ -2,7 +2,7 @@ config.toml
 *.replit
 *.env
 cora/temp/
-cora/cache/mcsrvutil/
+cora/cache/
 data/
 logs/
 temp/
