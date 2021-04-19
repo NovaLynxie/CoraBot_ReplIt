@@ -6,7 +6,7 @@ const logger = require('./cora/providers/WinstonPlugin');
 const {version} = require('./package.json');
 logger.init(`CoraBot v${version}`);
 // ================= START BOT CODE ===================
-const { CommandoClient, /*SQLiteProvider*/ } = require('discord.js-commando');
+const { CommandoClient, SQLiteProvider } = require('discord.js-commando');
 const { Structures } = require('discord.js');
 // ------------------- Bot's Modules ------------------
 const fs = require('fs');
@@ -22,6 +22,8 @@ logger.debug('Loaded crashReporter functions from crashReporter.js');
 require('./cora/dashboard/dashsrv'); // spin up built-in server
 //const Dashboard = require("discord-bot-dashboard"); //Currently unused.
 const path = require('path'); // Loads path library for code file to use file directories.
+const sqlite = require('sqlite');
+const sqlite3 = require('sqlite3');
 
 Structures.extend('Guild', Guild => {
   class MusicGuild extends Guild {
@@ -46,6 +48,10 @@ const client = new CommandoClient({
   invite: '',
 });
 const eventFiles = fs.readdirSync('./cora/events').filter(file => file.endsWith('.js'));
+
+client.setProvider(
+  sqlite.open({ filename: 'cora/cache/database.db', driver: sqlite3.Database }).then(db => new SQLiteProvider(db)).catch((logger.error))
+)
 
 client.registry
   .registerDefaultTypes()
