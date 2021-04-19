@@ -82,7 +82,7 @@ for (const file of eventFiles) {
 process.on('unhandledRejection', error => {
     //console.log(`Uncaught Promise Rejection Detected! ${error}`)
     logger.warn(`Uncaught Promise Rejection Exception thrown!`)
-    logger.error(`Caused by: ${error}`)
+    logger.error(`Caused by: ${error.message}`)
     if (debug == true) {
       logger.debug(error.stack)
     }
