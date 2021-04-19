@@ -50,6 +50,7 @@ const client = new CommandoClient({
 const eventFiles = fs.readdirSync('./cora/events').filter(file => file.endsWith('.js'));
 
 client.setProvider(
+  // Set providers to store guild settings like prefix across restarts.
   sqlite.open({ filename: 'cora/cache/database.db', driver: sqlite3.Database }).then(db => new SQLiteProvider(db)).catch((logger.error))
 )
 
