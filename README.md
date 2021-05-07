@@ -1,6 +1,6 @@
 # THIS REPOSITORY IS NO LONGER BEING UPDATED! 
 As of commit 5906c88 (v2.8.0), any new features have been migrated into CoraBot's main repository and further development has moved there.
-Please check https://github.com/NovaLynxie/CoraBot_Main for future bot updates.
+Furthermore no support will be offered and this is only to be used as is. Please check https://github.com/NovaLynxie/CoraBot_Main for future bot updates.
 
 # CoraBot_ReplIt
 _**UPDATE! CoraBot now has its music functionality back as repl.it now supports music bot functionality!**_  
